@@ -9,19 +9,36 @@
     "build": "yarn run clean && tsc",
     "clean": "rimraf dist",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts ./",
-    "start:watch": "nodemon src/server.ts"
+    "start:watch": "nodemon src/server.ts",
+    "test": "jest --config jest.spec.config.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "@types/node": "12.12.8",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
     "@typescript-eslint/parser": "^2.7.0",
-    "eslint": "6.1.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.4",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "jest-watch-typeahead": "^0.4.2",
+    "lint-staged": "^9.4.3",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   }

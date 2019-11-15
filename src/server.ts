@@ -1,5 +1,3 @@
-function add(x: number, y: number): number {
-  return x + y;
-}
+import sum from './calc';
 
-console.log(add(1, 2));
+console.log(sum(1, 2));
