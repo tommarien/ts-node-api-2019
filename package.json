@@ -6,12 +6,23 @@
   "author": "Tom Marien <tommarien@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "yarn run clean && tsc",
     "clean": "rimraf dist",
-    "lint": "tsc --noEmit --pretty",
-    "build": "tsc"
+    "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts ./",
+    "start:watch": "nodemon src/server.ts"
   },
   "devDependencies": {
+    "@types/node": "12.12.8",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
+    "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   }
 }
