@@ -4,5 +4,14 @@
   "main": "index.js",
   "repository": "git@github.com:tommarien/ts-node-api-2019.git",
   "author": "Tom Marien <tommarien@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "tsc --noEmit --pretty",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.0",
+    "typescript": "^3.7.2"
+  }
 }
