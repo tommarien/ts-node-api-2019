@@ -10,7 +10,8 @@
     "clean": "rimraf dist",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts ./",
     "start:watch": "nodemon src/server.ts",
-    "test": "jest --config jest.spec.config.js"
+    "test": "jest --config jest.unit.config.js",
+    "test:int": "jest --runInBand --config jest.integration.config.js"
   },
   "husky": {
     "hooks": {
