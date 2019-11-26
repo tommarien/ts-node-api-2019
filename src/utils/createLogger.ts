@@ -9,5 +9,6 @@ export default function createLogger(name?: string): Logger {
       translateTime: true,
     },
     serializers: stdSerializers,
+    level: process.env.LOG_LEVEL,
   });
 }
