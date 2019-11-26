@@ -1,3 +1,10 @@
-import sum from './calc';
+import app from './app';
+import createLogger from './utils/createLogger';
 
-console.log(sum(1, 2));
+const logger = createLogger('server');
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  logger.info(`Listening on ${port}`);
+});
