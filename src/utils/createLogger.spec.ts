@@ -3,6 +3,7 @@ import pino from 'pino';
 import createLogger from './createLogger';
 
 test('it creates the logger as expected', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pinoMock = (pino as unknown) as jest.Mock<any>;
 
   const logger = {};
@@ -13,13 +14,13 @@ test('it creates the logger as expected', () => {
 
   expect(result).toBe(logger);
   expect(pino).toHaveBeenCalledWith({
-    level: process.env.LOG_LEVEL,
+    level: 'info',
     name,
     prettyPrint: {
       ignore: 'pid,hostname',
       levelFirst: true,
       translateTime: true,
     },
-    serializers: {}, // * Coming from pino automock
+    serializers: {}, // Coming from pino automock
   });
 });
