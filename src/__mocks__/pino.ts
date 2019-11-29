@@ -9,4 +9,6 @@ const mockLogger = {
 
 const pino = jest.fn().mockImplementation(() => mockLogger);
 
+export const stdSerializers = {};
+
 export default pino;

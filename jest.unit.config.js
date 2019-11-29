@@ -5,7 +5,8 @@ module.exports = {
     "**/?(*.)+(spec).[jt]s?(x)"
   ],
   setupFilesAfterEnv: [
-    "jest-extended"
+    "jest-extended",
+    "<rootDir>/jest.setup.js"
   ],
   watchPlugins: [
     "jest-watch-typeahead/filename",
