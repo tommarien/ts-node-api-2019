@@ -6,7 +6,7 @@
   "author": "Tom Marien <tommarien@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "env": "sync-dotenv --sample .env.jest",
+    "env": "sync-dotenv",
     "build": "yarn run clean && tsc",
     "clean": "rimraf dist",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts ./",
