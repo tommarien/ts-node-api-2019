@@ -1,0 +1,30 @@
+version: 2.1
+executors:
+  node_lts: # declares a reusable executor
+    docker:
+      - image: node:12.14.0
+    working_directory: ~/repo
+jobs:
+  build:
+    executor: node_lts
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - yarn-v12-{{ checksum "yarn.lock" }}
+
+      - run: yarn install
+
+      - save_cache:
+          key: yarn-v12-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - node_modules
+
+      - run: yarn lint
+workflows:
+  version: 2
+  complete:
+    jobs:
+      - build
