@@ -52,7 +52,7 @@ describe('App', () => {
     });
 
     // it adds the headers
-    expect(header).toHaveProperty('www-authenticate', 'basic ');
+    expect(header).toHaveProperty('www-authenticate', 'basic');
 
     // ensure it does not call log the error
     expect(pinoMock().error).not.toHaveBeenCalled();
