@@ -2,7 +2,7 @@ version: 2.1
 executors:
   node_lts: # declares a reusable executor
     docker:
-      - image: &NODE_VERSION node:12.14.0
+      - image: &NODE_VERSION node:12.14.1
     working_directory: ~/repo
 jobs:
   build:
