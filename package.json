@@ -5,6 +5,11 @@
   "repository": "git@github.com:tommarien/ts-node-api-2019.git",
   "author": "Tom Marien <tommarien@gmail.com>",
   "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "scripts": {
     "env": "sync-dotenv",
     "build": "yarn run clean && tsc",
@@ -16,7 +21,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "lint-staged": {
@@ -30,6 +36,7 @@
     "@types/supertest": "^2.0.9",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
+    "cz-conventional-changelog": "^3.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "14.1.0",
     "eslint-config-prettier": "^6.11.0",
