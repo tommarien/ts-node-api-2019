@@ -8,7 +8,7 @@
   "scripts": {
     "env": "sync-dotenv",
     "build": "yarn run clean && tsc",
-    "clean": "rimraf dist",
+    "clean": "rimraf coverage dist",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts ./",
     "serve": "nodemon --exec ts-node -r dotenv/config src/server.ts",
     "test": "jest --config jest.unit.config.js",
