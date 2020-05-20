@@ -6,5 +6,5 @@ const logger = createLogger('server');
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  logger.info(`Listening on ${port}`);
+  logger.info(`Listening on port:${port}`);
 });
