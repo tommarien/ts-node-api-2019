@@ -15,7 +15,7 @@
     "build": "yarn run clean && tsc",
     "clean": "rimraf coverage dist",
     "lint": "tsc --noEmit --pretty && eslint --ext .js,.ts ./",
-    "serve": "nodemon --exec ts-node -r dotenv/config src/server.ts",
+    "serve": "nodemon --exec ts-node -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --config jest.unit.config.js",
     "test:int": "jest --runInBand --config jest.integration.config.js"
   },

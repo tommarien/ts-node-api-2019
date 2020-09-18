@@ -16,11 +16,5 @@ test('it creates the logger as expected', () => {
   expect(pino).toHaveBeenCalledWith({
     level: 'info',
     name,
-    prettyPrint: {
-      ignore: 'pid,hostname',
-      levelFirst: true,
-      translateTime: true,
-    },
-    serializers: {}, // Coming from pino automock
   });
 });
