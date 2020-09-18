@@ -16,7 +16,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     isServer,
   } = boomify(err);
 
-  logger.error({ err, req }, 'Server error occurred');
+  if (isServer) logger.error({ err, req }, 'Server error occurred');
 
   return res //
     .set(headers)
