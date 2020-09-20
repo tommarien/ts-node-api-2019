@@ -1,9 +1,9 @@
 import { ErrorRequestHandler } from 'express';
 import { boomify } from '@hapi/boom';
 
-import createLogger from '../utils/createLogger';
+import loggerFactory from '../utils/loggerFactory';
 
-const logger = createLogger('error-handler');
+const logger = loggerFactory('error-handler');
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (res.headersSent) {

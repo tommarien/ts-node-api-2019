@@ -1,7 +1,7 @@
 import app from './app';
-import createLogger from './utils/createLogger';
+import loggerFactory from './utils/loggerFactory';
 
-const logger = createLogger('server');
+const logger = loggerFactory('server');
 
 const port = process.env.PORT || 3000;
 
