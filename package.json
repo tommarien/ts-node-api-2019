@@ -48,6 +48,7 @@
     "jest-watch-typeahead": "^0.6.0",
     "lint-staged": "^10.2.9",
     "nodemon": "^2.0.4",
+    "pino-pretty": "^4.2.1",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "supertest": "^4.0.2",
@@ -60,7 +61,6 @@
     "@hapi/boom": "^9.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "pino": "^6.3.2",
-    "pino-pretty": "^4.0.0"
+    "pino": "^6.3.2"
   }
 }
