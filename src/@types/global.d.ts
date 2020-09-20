@@ -1,4 +1,5 @@
 import { LevelWithSilent } from "pino";
+import { Environment } from "./api";
 
 declare global {
 
@@ -6,7 +7,9 @@ declare global {
     interface ProcessEnv {
       PORT?: string | number;
       LOG_LEVEL?: LevelWithSilent;
+      RUNTIME_ENV?: Environment;
+      GRACEFUL_SHUTDOWN?: string;
     }
   }
-  
+
 }
