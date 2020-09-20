@@ -1,4 +1,3 @@
-// Environment options
-process.env = Object.assign(process.env, {
-  LOG_LEVEL: 'info',
-});
+// Environment
+process.env.PORT = 3000;
+process.env.LOG_LEVEL = 'silent';
