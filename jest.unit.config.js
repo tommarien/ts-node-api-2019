@@ -4,7 +4,7 @@ module.exports = {
   testMatch: [
     "**/?(*.)+(spec).[jt]s?(x)"
   ],
-  testPathIgnorePatterns: ["dist"],
+  testPathIgnorePatterns: ["/dist/"],
   setupFilesAfterEnv: [
     "<rootDir>/jest.setup.js"
   ],
