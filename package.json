@@ -12,7 +12,7 @@
   },
   "scripts": {
     "env": "sync-dotenv",
-    "build": "yarn run clean && tsc",
+    "build": "yarn run clean && tsc --sourceMap",
     "clean": "rimraf coverage dist",
     "lint": "concurrently -n tsc,eslint \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
     "serve": "nodemon --exec ts-node -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
