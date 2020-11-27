@@ -10,7 +10,7 @@
     "build": "yarn run clean && tsc --sourceMap",
     "clean": "rimraf coverage dist",
     "lint": "concurrently -n tsc,eslint \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
-    "serve": "nodemon --exec ts-node -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
+    "serve": "nodemon --exec ts-node --files -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --config jest.unit.config.js",
     "test:int": "jest --runInBand --config jest.integration.config.js"
   },
@@ -29,6 +29,7 @@
     "@types/node": "^14.14.10",
     "@types/pino": "^6.3.4",
     "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "concurrently": "^5.3.0",
@@ -57,6 +58,7 @@
     "@hapi/boom": "^9.1.0",
     "express": "^4.17.1",
     "http-terminator": "^2.0.3",
-    "pino": "^6.7.0"
+    "pino": "^6.7.0",
+    "uuid": "^8.3.1"
   }
 }

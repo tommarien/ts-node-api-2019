@@ -3,20 +3,20 @@ import { boomify } from '@hapi/boom';
 
 import loggerFactory from '../utils/loggerFactory';
 
-const logger = loggerFactory('error-handler');
+const logger = loggerFactory('errorHandler');
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (res.headersSent) {
-    logger.error({ err, req, res }, 'Error occurred but headers already sent');
+    logger.error({ err, req, res }, 'error occurred but headers already sent');
     return next();
   }
 
   const {
     output: { headers, statusCode, payload },
     isServer,
-  } = boomify(err);
+  } = boomify(err, { statusCode: err.statusCode });
 
-  if (isServer) logger.error({ err, req }, 'Server error occurred');
+  if (isServer) logger.error({ err, req }, 'server error occurred');
 
   return res //
     .set(headers)
