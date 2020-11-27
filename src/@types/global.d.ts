@@ -1,8 +1,7 @@
-import { LevelWithSilent } from "pino";
-import { Environment } from "./api";
+import { LevelWithSilent } from 'pino';
+import { Environment } from './api';
 
 declare global {
-
   namespace NodeJS {
     interface ProcessEnv {
       PORT?: string;
@@ -11,5 +10,4 @@ declare global {
       GRACEFUL_SHUTDOWN?: string;
     }
   }
-
 }
