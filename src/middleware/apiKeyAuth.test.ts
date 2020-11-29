@@ -1,10 +1,10 @@
 import express, { Application, RequestHandler } from 'express';
 import request from 'supertest';
-import apiKeyAuth from './apiKeyAuthentication';
+import apiKeyAuth from './apiKeyAuth';
 
 const API_KEY_HEADER = 'X-Api-Key';
 
-describe('apiAuthenticationMiddleware', () => {
+describe('apiKeyAuth middleware', () => {
   function createApplication(): Application {
     const app = express();
 

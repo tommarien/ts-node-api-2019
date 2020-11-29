@@ -1,6 +1,6 @@
 import express from 'express';
 import apiRouter from './api/apiRouter';
-import catchAllRouteHandler from './middleware/catchAllRouteHandler';
+import catchAll from './middleware/catchAll';
 import enforceHttps from './middleware/enforceHttps';
 import errorHandler from './middleware/errorHandler';
 import requestId from './middleware/requestId';
@@ -20,7 +20,7 @@ if (process.env.ENFORCE_HTTPS === 'true') {
 
 // register api routes
 app.use('/api', apiRouter);
-app.use('/api/*', catchAllRouteHandler);
+app.use('/api/*', catchAll);
 
 // Register our errorHandler
 app.use(errorHandler);

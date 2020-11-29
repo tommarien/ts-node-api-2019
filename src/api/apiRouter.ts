@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import apiKeyAuthentication from '../middleware/apiKeyAuthentication';
+import apiKeyAuth from '../middleware/apiKeyAuth';
 
 const apiRouter = Router();
 
 // Router specific middleware
-apiRouter.use(apiKeyAuthentication);
+apiRouter.use(apiKeyAuth);
 
 export default apiRouter;
