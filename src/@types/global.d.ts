@@ -10,6 +10,7 @@ declare global {
       GRACEFUL_SHUTDOWN?: string;
       ENFORCE_HTTPS?: string;
       ALLOWED_API_KEYS?: string;
+      MONGO_URI: string;
     }
   }
 
