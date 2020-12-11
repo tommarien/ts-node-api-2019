@@ -4,6 +4,7 @@
     "airbnb-base",
     "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     "prettier",
+    "prettier/prettier",
     "prettier/@typescript-eslint",
     "plugin:import/typescript",
     "plugin:jest/recommended"
