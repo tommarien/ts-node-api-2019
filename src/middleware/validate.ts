@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import Ajv, { ValidateFunction } from 'ajv';
 import { RequestHandler } from 'express';
 
 type RouteSchema = {
-  query?: object;
-  params?: object;
-  body?: object;
+  query?: Record<string, unknown>;
+  params?: Record<string, unknown>;
+  body?: Record<string, unknown>;
 };
 
 type RouteParts = keyof RouteSchema;
