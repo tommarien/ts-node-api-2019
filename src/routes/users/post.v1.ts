@@ -1,9 +1,9 @@
 import { RequestHandler } from 'express';
 import validate from '../../middleware/validate';
-import userBodySchema from '../../../schemas/src/user.body.v1.json';
-import { UserBodyV1 } from '../../../schemas/types/user.body.v1';
+import userBodySchema from '../../../schemas/src/user.req.body.v1.json';
+import { UserReqBodyV1 } from '../../../schemas/types/user.req.body.v1';
 
-const postUserV1: RequestHandler<unknown, Record<string, unknown>, UserBodyV1> = (req, res): void => {
+const postUserV1: RequestHandler<unknown, Record<string, unknown>, UserReqBodyV1> = (req, res): void => {
   const { body } = req;
 
   res.send({ body });

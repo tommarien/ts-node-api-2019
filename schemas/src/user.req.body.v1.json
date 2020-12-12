@@ -3,10 +3,12 @@
   "type": "object",
   "properties": {
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 30
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 80
     },
     "birthDate": {
       "type": "string",
@@ -14,7 +16,8 @@
     },
     "email": {
       "type": "string",
-      "format": "email"
+      "format": "email",
+      "maxLength": 120
     }
   },
   "additionalProperties": false,
