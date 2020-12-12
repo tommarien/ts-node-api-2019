@@ -1,5 +1,5 @@
 import express from 'express';
-import apiRouter from './api/apiRouter';
+import apiRouter from './routes/apiRouter';
 import catchAll from './middleware/catchAll';
 import enforceHttps from './middleware/enforceHttps';
 import errorHandler from './middleware/errorHandler';

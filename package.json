@@ -9,6 +9,7 @@
     "env": "sync-dotenv",
     "build": "yarn run clean && tsc --sourceMap",
     "clean": "rimraf coverage dist",
+    "generate": "json2ts -i schemas/src/ -o schemas/types/",
     "lint": "concurrently -n tsc,eslint \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
     "migrate": "node -r dotenv/config ./node_modules/migrate-mongo/bin/migrate-mongo.js",
     "serve": "nodemon --exec ts-node --files -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
@@ -60,6 +61,7 @@
     "ajv": "^6.12.6",
     "express": "^4.17.1",
     "http-terminator": "^2.0.3",
+    "json-schema-to-typescript": "^10.0.0",
     "migrate-mongo": "^8.1.4",
     "pino": "^6.8.0",
     "uuid": "^8.3.2"

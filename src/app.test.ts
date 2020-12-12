@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import request from 'supertest';
 import { unauthorized } from '@hapi/boom';
 
-import apiRouter from './api/apiRouter';
+import apiRouter from './routes/apiRouter';
 import app from './app';
 import loggerFactory from './utils/loggerFactory';
 
