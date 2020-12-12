@@ -15,7 +15,7 @@ jest.mock('./utils/loggerFactory', () => {
 });
 
 jest.mock('uuid');
-jest.mock('./api/apiRouter');
+jest.mock('./routes/apiRouter');
 
 const apiRouterMock = mocked(apiRouter);
 const uuIdV4Mock = mocked(v4);
