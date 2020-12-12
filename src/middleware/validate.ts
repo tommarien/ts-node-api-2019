@@ -35,21 +35,20 @@ export default function validate(routeSchema: RouteSchema): RequestHandler {
   }, {} as Partial<Record<RouteParts, ValidateFunction>>);
 
   return function validationRequestHandler(req, res, next) {
-    validatedRouteParts.forEach((part) => {
-      const validatePart = validators[part];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const part of validatedRouteParts) {
+      const partValidate = validators[part];
 
-      if (validatePart) {
-        if (!validatePart(req[part]))
-          res
-            .status(400)
-            .send(
-              buildBadRequest(
-                `Request validation failed: ${ajv.errorsText(validatePart.errors, { dataVar: `${part}` })}`
-              )
-            );
+      if (partValidate && !partValidate(req[part])) {
+        res
+          .status(400)
+          .send(
+            buildBadRequest(`Request validation failed: ${ajv.errorsText(partValidate.errors, { dataVar: `${part}` })}`)
+          );
+
+        return;
       }
-    });
-
-    return next();
+    }
+    next();
   };
 }
