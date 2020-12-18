@@ -11,6 +11,7 @@ declare global {
       ENFORCE_HTTPS?: string;
       ALLOWED_API_KEYS?: string;
       MONGO_URI: string;
+      EXPOSE_API_DOCS?: string;
     }
   }
 

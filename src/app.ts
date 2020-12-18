@@ -1,9 +1,11 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 import apiRouter from './routes/apiRouter';
 import catchAll from './middleware/catchAll';
 import enforceHttps from './middleware/enforceHttps';
 import errorHandler from './middleware/errorHandler';
 import requestId from './middleware/requestId';
+import swaggerDocument from './swagger';
 
 const app = express();
 
@@ -21,6 +23,11 @@ if (process.env.ENFORCE_HTTPS === 'true') {
 // register api routes
 app.use('/api', apiRouter);
 app.use('/api/*', catchAll);
+
+// expose swagger docs
+if (process.env.EXPOSE_API_DOCS === 'true') {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
 
 // Register our errorHandler
 app.use(errorHandler);
