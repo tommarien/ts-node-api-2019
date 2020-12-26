@@ -1,4 +1,4 @@
-import UserReqBodyV1 from '../schemas/src/user.req.body.v1.json';
+import UserReqBodyV1 from './schemas/src/user.req.body.v1.json';
 
 export default {
   openapi: '3.0.0',
