@@ -65,7 +65,7 @@ jobs:
 
       - run: mkdir ~/jest
 
-      - run: JEST_JUNIT_OUTPUT_DIR=~/jest JEST_JUNIT_OUTPUT_NAME=test-int-junit.xml yarn test:int --ci --reporters=default --reporters=jest-junit --forceExit
+      - run: JEST_JUNIT_OUTPUT_DIR=~/jest JEST_JUNIT_OUTPUT_NAME=test-int-junit.xml yarn test:int --ci --reporters=default --reporters=jest-junit
 
       - store_test_results:
           path: ~/jest
