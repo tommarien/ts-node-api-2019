@@ -57,7 +57,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - yarn-v12-{{ checksum "yarn.lock" }}
+            - yarn-v14-{{ checksum "yarn.lock" }}
 
       - run: yarn install
 
