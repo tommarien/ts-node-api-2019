@@ -6,5 +6,11 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     "**/dist": true
+  },
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

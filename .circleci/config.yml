@@ -43,7 +43,7 @@ jobs:
   test-integration:
     docker:
       - image: *NODE_VERSION
-      - image: mongo:3.6.16
+      - image: circleci/postgres:12.5
     working_directory: ~/repo
     steps:
       - checkout
