@@ -28,9 +28,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
     return req;
   }
 
-  beforeAll(async () => {
-    await dbHelper.truncateTable('users');
-  });
+  beforeAll(() => dbHelper.truncateTable('users'));
 
   afterAll(() => pool.end());
 
