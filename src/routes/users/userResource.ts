@@ -1,15 +1,15 @@
 import { format } from 'date-fns';
-import { UserResourceV1 } from '../../schemas/types/user.resource.v1';
+import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
 import { User } from '../../services/userRepository';
 
-export type UserResponseV1 = UserResourceV1 & {
+export type UserResource = UserRequestBodyV1 & {
   id: string;
 };
 
-export function mapToResource(user: User): UserResponseV1 {
+export function mapToResource(user: User): UserResource {
   const { birthDate, ...rest } = user;
 
-  const resource: UserResponseV1 = {
+  const resource: UserResource = {
     ...rest,
   };
 

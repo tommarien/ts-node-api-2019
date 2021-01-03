@@ -1,4 +1,4 @@
-import UserReqBodyV1 from './schemas/src/user.resource.v1.json';
+import UserReqBodyV1 from './schemas/src/user.request.body.v1.json';
 
 export default {
   openapi: '3.0.0',
@@ -53,7 +53,7 @@ export default {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/UserResBodyV1',
+                  $ref: '#/components/schemas/UserResourceV1',
                 },
               },
             },
@@ -63,9 +63,6 @@ export default {
           },
           '401': {
             $ref: '#/components/responses/Unauthorized',
-          },
-          '404': {
-            $ref: '#/components/responses/NotFound',
           },
         },
       },
@@ -159,11 +156,8 @@ export default {
         required: ['statusCode', 'error'],
       },
       UserReqBodyV1,
-      UserResBodyV1: {
+      UserResourceV1: {
         allOf: [
-          {
-              $ref: '#/components/schemas/UserReqBodyV1',
-          },
           {
             type: 'object',
             properties: {
@@ -173,6 +167,9 @@ export default {
               },
             },
             required: ['id'],
+          },
+          {
+            $ref: '#/components/schemas/UserReqBodyV1',
           },
         ],
       },

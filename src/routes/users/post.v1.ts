@@ -1,11 +1,11 @@
 import { RequestHandler } from 'express';
 import validate from '../../middleware/validate';
-import userBodySchema from '../../schemas/src/user.resource.v1.json';
-import { UserResourceV1 } from '../../schemas/types/user.resource.v1';
+import userBodySchema from '../../schemas/src/user.request.body.v1.json';
+import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
 import userRepository from '../../services/userRepository';
-import { mapToResource, UserResponseV1 } from './userResource';
+import { mapToResource, UserResource } from './userResource';
 
-const postUserV1: RequestHandler<unknown, UserResponseV1, UserResourceV1> = async (req, res): Promise<void> => {
+const postUserV1: RequestHandler<unknown, UserResource, UserRequestBodyV1> = async (req, res): Promise<void> => {
   const {
     body: { birthDate, ...rest },
   } = req;
@@ -15,9 +15,9 @@ const postUserV1: RequestHandler<unknown, UserResponseV1, UserResourceV1> = asyn
     ...(birthDate ? { birthDate: new Date(birthDate) } : {}),
   });
 
-  const body: UserResponseV1 = mapToResource(user);
+  const resBody: UserResource = mapToResource(user);
 
-  res.send(body);
+  res.send(resBody);
 };
 
 export default [validate({ body: userBodySchema }), postUserV1];
