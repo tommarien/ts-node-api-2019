@@ -44,6 +44,10 @@ jobs:
     docker:
       - image: *NODE_VERSION
       - image: circleci/postgres:12.5
+        environment:
+          POSTGRES_USER: node-api
+          POSTGRES_PASSWORD: our-secret
+          POSTGRES_DB: ts-node-api
     working_directory: ~/repo
     steps:
       - checkout
