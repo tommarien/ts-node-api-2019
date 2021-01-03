@@ -1,5 +1,8 @@
 # Migrations
 
+## Options
+* --db=database (optional)
+
 ## Creating a new migration
 
 ```sh
