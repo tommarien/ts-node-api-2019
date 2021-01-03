@@ -17,7 +17,22 @@
     "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
     "sourceType": "module" // Allows for the use of imports
   },
+  "plugins":["sql"],
   "rules": {
+    "sql/format": [
+      2,
+      {
+        "ignoreExpressions": false,
+        "ignoreInline": true,
+        "ignoreTagless": true
+      }
+    ],
+    "sql/no-unsafe-query": [
+      2,
+      {
+        "allowLiteral": false
+      }
+    ],
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     "import/prefer-default-export": "off",

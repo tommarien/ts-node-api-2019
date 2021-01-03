@@ -10,8 +10,13 @@ declare global {
       GRACEFUL_SHUTDOWN?: string;
       ENFORCE_HTTPS?: string;
       ALLOWED_API_KEYS?: string;
-      MONGO_URI: string;
       EXPOSE_API_DOCS?: string;
+      PGHOST?: string;
+      PGUSER?: string;
+      PGDATABASE?: string;
+      PGPASSWORD?: string;
+      PGPORT?: string | number;
+      PGMAXPOOLSIZE?: string | number;
     }
   }
 

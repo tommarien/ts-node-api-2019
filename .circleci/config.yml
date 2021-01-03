@@ -43,8 +43,16 @@ jobs:
   test-integration:
     docker:
       - image: *NODE_VERSION
-      - image: mongo:3.6.16
+      - image: circleci/postgres:12.5
+        environment:
+          POSTGRES_USER: node-api
+          POSTGRES_PASSWORD: our-secret
+          POSTGRES_DB: ts-node-api
     working_directory: ~/repo
+    environment:
+       PGDATABASE: ts-node-api
+       PGUSER: node-api
+       PGPASSWORD: our-secret
     steps:
       - checkout
       - restore_cache:
@@ -53,9 +61,11 @@ jobs:
 
       - run: yarn install
 
+      - run: yarn migrate up --db=$PGDATABASE
+
       - run: mkdir ~/jest
 
-      - run: JEST_JUNIT_OUTPUT_DIR=~/jest JEST_JUNIT_OUTPUT_NAME=test-int-junit.xml yarn test:int --ci --reporters=default --reporters=jest-junit
+      - run: JEST_JUNIT_OUTPUT_DIR=~/jest JEST_JUNIT_OUTPUT_NAME=test-int-junit.xml yarn test:int --ci --reporters=default --reporters=jest-junit --forceExit
 
       - store_test_results:
           path: ~/jest

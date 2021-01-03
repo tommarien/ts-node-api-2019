@@ -1,6 +1,7 @@
 import { createHttpTerminator } from 'http-terminator';
 
 import app from './app';
+import pool from './services/db';
 import loggerFactory from './utils/loggerFactory';
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ if (process.env.GRACEFUL_SHUTDOWN === 'true') {
 
     httpTerminator //
       .terminate()
+      .then(() => pool.end())
       .then(() => {
         logger.info('gracefully exited');
         process.exit(0);

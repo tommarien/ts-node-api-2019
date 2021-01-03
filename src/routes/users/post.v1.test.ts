@@ -1,5 +1,8 @@
+import { parse } from 'date-fns';
 import request from 'supertest';
 import app from '../../app';
+import pool from '../../services/db';
+import dbHelper from '../../test/dbHelper';
 
 const RESOURCE_URI = '/api/v1/users';
 
@@ -25,8 +28,58 @@ describe(`POST ${RESOURCE_URI}`, () => {
     return req;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  describe('HTTP 200 (OK)', () => {});
+  beforeAll(() => dbHelper.truncateTable('users'));
+
+  afterAll(() => pool.end());
+
+  describe('HTTP 200 (OK)', () => {
+    test('it returns the status and stores a new user with minimum props', async () => {
+      const user = buildValidUser();
+
+      const { body } = await act({ data: user }).expect(200);
+
+      expect(body).toStrictEqual({
+        id: expect.any(String),
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      });
+
+      const row = await dbHelper.findById('users', body.id);
+
+      expect(row).toStrictEqual({
+        id: body.id,
+        first_name: body.firstName,
+        last_name: body.lastName,
+        email: body.email,
+        birth_date: null,
+      });
+    });
+
+    test('it returns the status and stores a new user with all props', async () => {
+      const user = { ...buildValidUser(), birthDate: '1980-09-15' };
+
+      const { body } = await act({ data: user }).expect(200);
+
+      expect(body).toStrictEqual({
+        id: expect.any(String),
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        birthDate: user.birthDate,
+      });
+
+      const row = await dbHelper.findById('users', body.id);
+
+      expect(row).toStrictEqual({
+        id: body.id,
+        first_name: body.firstName,
+        last_name: body.lastName,
+        email: body.email,
+        birth_date: parse(body.birthDate, 'yyyy-MM-dd', new Date()),
+      });
+    });
+  });
 
   describe('HTTP 400 (Bad Request)', () => {
     describe('firstName', () => {
