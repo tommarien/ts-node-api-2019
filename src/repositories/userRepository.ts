@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 import SQL from '@nearform/sql';
-import { ClientBase } from 'pg';
 import { v4 } from 'uuid';
-import pool from './db';
+import { QueryClient } from '../@types/api';
+import { User } from '../@types/models';
+import pool from '../services/db';
 
-type UserRow = {
+type UserDataRow = {
   id: string;
   first_name: string;
   last_name: string;
@@ -12,17 +13,7 @@ type UserRow = {
   birth_date?: Date;
 };
 
-export type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  birthDate?: Date;
-};
-
-type QueryClient = Pick<ClientBase, 'query'>;
-
-function mapToUser(row: UserRow): User {
+function mapToUser(row: UserDataRow): User {
   return {
     id: row.id,
     firstName: row.first_name,
@@ -39,7 +30,8 @@ async function save(props: Omit<User, 'id'>, client: QueryClient = pool): Promis
   };
 
   await client.query(SQL`
-    INSERT INTO users(id, first_name, last_name, email, birth_date) VALUES(
+    INSERT INTO users (id, first_name, last_name, email, birth_date)
+    VALUES(
       ${user.id},
       ${user.firstName},
       ${user.lastName},
