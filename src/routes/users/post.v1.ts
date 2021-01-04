@@ -11,7 +11,7 @@ const postUserV1: RequestHandler<unknown, UserResource, UserRequestBodyV1> = asy
       body: { birthDate, ...rest },
     } = req;
 
-    const user = await userRepository.create({
+    const user = await userRepository.save({
       ...rest,
       ...(birthDate ? { birthDate: new Date(birthDate) } : {}),
     });

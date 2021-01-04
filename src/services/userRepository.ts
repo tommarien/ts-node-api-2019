@@ -32,7 +32,7 @@ function mapToUser(row: UserRow): User {
   };
 }
 
-async function create(props: Omit<User, 'id'>, client: QueryClient = pool): Promise<User> {
+async function save(props: Omit<User, 'id'>, client: QueryClient = pool): Promise<User> {
   const user: User = {
     id: v4(),
     ...props,
@@ -62,6 +62,6 @@ async function findById(id: string, client: QueryClient = pool): Promise<User | 
 }
 
 export default {
-  create,
+  save,
   findById,
 };
