@@ -67,6 +67,51 @@ export default {
         },
       },
     },
+    '/v1/users/{id}': {
+      get: {
+        operationId: 'getUserV1',
+        tags: ['Users'],
+        description: 'Find a user by id',
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            description: 'The id of the user to return',
+            required: true,
+            schema: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'OK',
+            headers: {
+              'x-request-id': {
+                $ref: '#/components/headers/RequestId',
+              },
+            },
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/UserResourceV1',
+                },
+              },
+            },
+          },
+          '400': {
+            $ref: '#/components/responses/BadRequest',
+          },
+          '401': {
+            $ref: '#/components/responses/Unauthorized',
+          },
+          '404': {
+            $ref: '#/components/responses/NotFound',
+          },
+        },
+      },
+    },
   },
   components: {
     headers: {
