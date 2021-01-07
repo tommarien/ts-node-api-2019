@@ -24,23 +24,6 @@ jobs:
 
       - run: yarn lint
   test:
-    executor: node_lts
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - yarn-v14-{{ checksum "yarn.lock" }}
-
-      - run: yarn install
-
-      - run: mkdir ~/jest
-
-      - run: JEST_JUNIT_OUTPUT_DIR=~/jest JEST_JUNIT_OUTPUT_NAME=test-unit-junit.xml yarn test --ci --reporters=default --reporters=jest-junit --maxWorkers=2
-
-      - store_test_results:
-          path: ~/jest
-  test-integration:
     docker:
       - image: *NODE_VERSION
       - image: circleci/postgres:12.5
@@ -50,9 +33,9 @@ jobs:
           POSTGRES_DB: ts-node-api
     working_directory: ~/repo
     environment:
-       PGDATABASE: ts-node-api
-       PGUSER: node-api
-       PGPASSWORD: our-secret
+      PGDATABASE: ts-node-api
+      PGUSER: node-api
+      PGPASSWORD: our-secret
     steps:
       - checkout
       - restore_cache:
@@ -75,8 +58,5 @@ workflows:
     jobs:
       - build
       - test:
-          requires:
-            - build
-      - test-integration:
           requires:
             - build

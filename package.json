@@ -13,8 +13,7 @@
     "lint": "concurrently -n tsc,eslint \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
     "migrate": "node -r dotenv/config lib/migrate.js",
     "serve": "nodemon --exec ts-node --files -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
-    "test": "jest --config jest.unit.config.js",
-    "test:int": "jest --runInBand --config jest.integration.config.js"
+    "test": "jest --runInBand --config jest.config.js"
   },
   "husky": {
     "hooks": {
