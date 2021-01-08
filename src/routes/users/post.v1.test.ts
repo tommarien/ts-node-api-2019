@@ -2,7 +2,7 @@ import { parse } from 'date-fns';
 import request from 'supertest';
 import app from '../../app';
 import pool from '../../data/pool';
-import dbHelper from '../../test/dbHelper';
+import dbHelper from '../../../test/dbHelper';
 
 const RESOURCE_URI = '/api/v1/users';
 
