@@ -8,7 +8,7 @@ import apiRouter from './routes/apiRouter';
 import app from './app';
 import loggerFactory from './core/loggerFactory';
 
-jest.mock('./utils/loggerFactory', () => {
+jest.mock('./core/loggerFactory', () => {
   const logger = { error: jest.fn(), warn: jest.fn() };
 
   return () => logger;
