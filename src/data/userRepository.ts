@@ -1,19 +1,11 @@
-/* eslint-disable camelcase */
 import SQL from '@nearform/sql';
 import { v4 } from 'uuid';
 import { QueryClient } from '../@types/api';
 import { User } from '../@types/models';
-import pool from '../services/db';
+import { DbUser } from './models';
+import pool from './pool';
 
-type UserDataRow = {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  birth_date?: Date;
-};
-
-function mapToUser(row: UserDataRow): User {
+function mapToUser(row: DbUser): User {
   return {
     id: row.id,
     firstName: row.first_name,
@@ -31,7 +23,7 @@ async function save(props: Omit<User, 'id'>, client: QueryClient = pool): Promis
 
   await client.query(SQL`
     INSERT INTO users (id, first_name, last_name, email, birth_date)
-    VALUES(
+    VALUES (
       ${user.id},
       ${user.firstName},
       ${user.lastName},

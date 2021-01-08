@@ -1,7 +1,7 @@
 import { createHttpTerminator } from 'http-terminator';
 
 import app from './app';
-import pool from './services/db';
+import pool from './data/pool';
 import loggerFactory from './utils/loggerFactory';
 
 const PORT = process.env.PORT || 3000;

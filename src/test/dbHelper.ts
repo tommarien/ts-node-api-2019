@@ -1,4 +1,4 @@
-import pool from '../services/db';
+import pool from '../data/pool';
 
 type KnownTable = 'users';
 

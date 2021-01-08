@@ -2,7 +2,7 @@ import { notFound } from '@hapi/boom';
 import { RequestHandler } from 'express';
 import { toResource } from '../../mappers/userMapper';
 import validate from '../../middleware/validate';
-import userRepository from '../../repositories/userRepository';
+import userRepository from '../../data/userRepository';
 import UuidParamsSchema from '../../schemas/src/uuid.resource.id.params.json';
 
 const getUserV1: RequestHandler = async (req, res, next): Promise<void> => {
