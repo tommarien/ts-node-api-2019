@@ -953,10 +953,10 @@
   resolved "https://registry.yarnpkg.com/@types/pino-std-serializers/-/pino-std-serializers-2.4.0.tgz#8cad99175cb79c2448f7455a2d32fb3fde29579c"
   integrity sha512-eAdu+NW1IkCdmp85SnhyKha+OOREQMT9lXaoICQxa7bhSauRiLzu3WSNt9Mf2piuJvWeXF/G0hGWHr63xNpIRA==
 
-"@types/pino@^6.3.4":
-  version "6.3.4"
-  resolved "https://registry.yarnpkg.com/@types/pino/-/pino-6.3.4.tgz#f22524c33a7e21f45f5cc7fc2c570ccae0be98fa"
-  integrity sha512-03MpZ/HP6GlG0oo5dcb8NBpI21zNESswTbaA0VB4uuigXfVy+XLmzh39CY6VCAahPMxCPtuqSEdhwGeA3AOYXg==
+"@types/pino@^6.3.5":
+  version "6.3.5"
+  resolved "https://registry.yarnpkg.com/@types/pino/-/pino-6.3.5.tgz#758734942f9234a6057fe66d0f7cd7e309d617f7"
+  integrity sha512-l3MXskUBef0KnHtEaOMq0OdPDG5+9nRNP3AmeuW+RJCIbOPRuVaEhJUCe5xE9LGPqgU4psF0okb38h1tp2ZVZw==
   dependencies:
     "@types/node" "*"
     "@types/pino-std-serializers" "*"
@@ -4491,10 +4491,10 @@ json-schema-ref-parser@^9.0.6:
   dependencies:
     "@apidevtools/json-schema-ref-parser" "9.0.6"
 
-json-schema-to-typescript@^10.1.1:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/json-schema-to-typescript/-/json-schema-to-typescript-10.1.1.tgz#85ddde0f2ed51434f9debb63edc0134ddaecd6cf"
-  integrity sha512-wKrnekI8G0HLi+LNiXsjeXhjlGCOrKbUJUhBIXFjULkJATuOsbWgH64y0hUGamYioMG7i4W873khUrKN+0ChWg==
+json-schema-to-typescript@^10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/json-schema-to-typescript/-/json-schema-to-typescript-10.1.2.tgz#696e0dd5ab76e59b6700f6ac424d4b1d91526b52"
+  integrity sha512-BKn+custnB0vUCWkMB3xXsc7efoHtiPeEpJme9Lw5dGesl9VnKU6U0yasUn4kf+gMypV3COMsuNzsQtPwvfQsA==
   dependencies:
     "@types/json-schema" "^7.0.6"
     "@types/prettier" "^2.1.5"
@@ -5612,20 +5612,20 @@ pino-pretty@^4.3.0:
     split2 "^3.1.1"
     strip-json-comments "^3.1.1"
 
-pino-std-serializers@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-2.4.2.tgz#cb5e3e58c358b26f88969d7e619ae54bdfcc1ae1"
-  integrity sha512-WaL504dO8eGs+vrK+j4BuQQq6GLKeCCcHaMB2ItygzVURcL1CycwNEUHTD/lHFHs/NL5qAz2UKrjYWXKSf4aMQ==
+pino-std-serializers@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-3.1.0.tgz#fe62d339aeef359d9d7bdf61f4e4b2d7be8c73d4"
+  integrity sha512-Fk1pxhX6tuW4ozRDFw5Mz/IHQV5wXYXZwjG/gOpTNPCbYEMeNW9VnKAEu1428CwAQVupFruOr1vkC/ufmcwedA==
 
-pino@^6.9.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-6.9.0.tgz#adaa57b52b8ccd8efc3499dd6e7e00ee72884354"
-  integrity sha512-9RrRJsKOsgj50oGoR/y4EEVyUjMb/eRu8y4hjwPqM6q214xsxSxY/IKB+aEEv0slqNd4U0RVRfivKfy83UxgUQ==
+pino@^6.10.0:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/pino/-/pino-6.10.0.tgz#0dc4c701aef9e6f1ab276c7c1fbfcbebeba720db"
+  integrity sha512-ZFGE/Wq930gFb1h0RI6S/QOfkyzNj94Xubwlyo4XpxNUgrG1C0iEqnlooG5Fymx6yrUUtEJ8j/u8NCGwgwTXaQ==
   dependencies:
     fast-redact "^3.0.0"
     fast-safe-stringify "^2.0.7"
     flatstr "^1.0.12"
-    pino-std-serializers "^2.4.2"
+    pino-std-serializers "^3.1.0"
     quick-format-unescaped "^4.0.1"
     sonic-boom "^1.0.2"
 
