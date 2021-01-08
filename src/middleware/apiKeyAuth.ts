@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-import loggerFactory from '../utils/loggerFactory';
+import loggerFactory from '../core/loggerFactory';
 
 const logger = loggerFactory('apiKeyAuthentication');
 const API_KEY_HEADER_NAME = 'X-Api-Key';
