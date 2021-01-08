@@ -1,9 +1,8 @@
 import SQL from '@nearform/sql';
 import { v4 } from 'uuid';
-import { QueryClient } from '../@types/api';
 import { User } from '../@types/models';
 import { DbUser } from './models';
-import pool from './pool';
+import pool, { DbClient } from './pool';
 
 function mapToUser(row: DbUser): User {
   return {
@@ -15,7 +14,7 @@ function mapToUser(row: DbUser): User {
   };
 }
 
-async function save(props: Omit<User, 'id'>, client: QueryClient = pool): Promise<User> {
+async function save(props: Omit<User, 'id'>, client: DbClient = pool): Promise<User> {
   const user: User = {
     id: v4(),
     ...props,
@@ -35,7 +34,7 @@ async function save(props: Omit<User, 'id'>, client: QueryClient = pool): Promis
   return user;
 }
 
-async function findById(id: string, client: QueryClient = pool): Promise<User | null> {
+async function findById(id: string, client: DbClient = pool): Promise<User | null> {
   const { rows } = await client.query(
     SQL`select id, first_name, last_name, email, birth_date from users where id = ${id}`
   );
