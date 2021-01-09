@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
-import { User } from '../@types/models';
 import { UserResource } from '../@types/resources';
+import { User } from '../models/user';
 
 export function toResource(user: User): UserResource {
   const { birthDate, ...rest } = user;

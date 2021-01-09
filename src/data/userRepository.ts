@@ -1,6 +1,6 @@
 import SQL from '@nearform/sql';
 import { v4 } from 'uuid';
-import { User } from '../@types/models';
+import { User } from '../models/user';
 import { DbUser } from './models';
 import pool, { DbClient } from './pool';
 
