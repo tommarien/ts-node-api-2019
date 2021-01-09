@@ -1,6 +1,6 @@
 import { notFound } from '@hapi/boom';
 import { RequestHandler } from 'express';
-import { toResource } from '../../../mappers/userMapper';
+import { userToResourceMapper } from './resources';
 import validate from '../../middleware/validate';
 import userRepository from '../../../data/userRepository';
 import UuidParamsSchema from '../../schemas/src/uuid.resource.id.params.json';
@@ -12,8 +12,8 @@ const getUserV1: RequestHandler = async (req, res, next): Promise<void> => {
     const user = await userRepository.findById(id);
     if (!user) throw notFound(`A "user" resource identified with "${id}" was not found`);
 
-    const resBody = toResource(user);
-    res.send(resBody);
+    const body = userToResourceMapper(user);
+    res.send(body);
   } catch (e) {
     next(e);
   }
