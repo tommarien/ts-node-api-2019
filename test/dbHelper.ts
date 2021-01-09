@@ -1,3 +1,4 @@
+import { DbUser } from '../src/data/models';
 import pool from '../src/data/pool';
 
 type KnownTable = 'users';
@@ -13,6 +14,7 @@ async function findById(tableName: KnownTable, id: unknown): Promise<Record<stri
   return rows[0];
 }
 
+function insert(tableName: 'users', row: DbUser): Promise<void>;
 async function insert(tableName: KnownTable, row: Record<string, unknown>): Promise<void> {
   const columns = Object.keys(row);
   const values = Object.values(row).map((v) => (v === undefined ? null : v));
