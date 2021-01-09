@@ -1,6 +1,6 @@
-import app from './app';
+import app from './api/app';
 
-jest.mock('./app');
+jest.mock('./api/app');
 
 describe('Server', () => {
   test('it starts listening on the configured port', async () => {

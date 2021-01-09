@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express';
-import { UserResource } from '../../@types/resources';
+import { UserResource } from '../../resources';
 import validate from '../../middleware/validate';
 import userBodySchema from '../../schemas/src/user.request.body.v1.json';
 import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
-import { toResource } from '../../mappers/userMapper';
-import userRepository from '../../data/userRepository';
+import { toResource } from '../../../mappers/userMapper';
+import userRepository from '../../../data/userRepository';
 
 const postUserV1: RequestHandler<unknown, UserResource, UserRequestBodyV1> = async (req, res, next): Promise<void> => {
   try {

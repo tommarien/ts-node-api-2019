@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { UserResource } from '../@types/resources';
+import { UserResource } from '../api/resources';
 import { User } from '../models/user';
 
 export function toResource(user: User): UserResource {

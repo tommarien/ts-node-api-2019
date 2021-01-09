@@ -1,4 +1,4 @@
-import { RouterInstaller } from '../../@types/api';
+import { RouterInstaller } from '../../../@types/api';
 import get from './get.v1';
 import post from './post.v1';
 

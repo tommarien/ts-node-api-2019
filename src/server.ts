@@ -1,6 +1,6 @@
 import { createHttpTerminator } from 'http-terminator';
 
-import app from './app';
+import app from './api/app';
 import pool from './data/pool';
 import loggerFactory from './core/loggerFactory';
 

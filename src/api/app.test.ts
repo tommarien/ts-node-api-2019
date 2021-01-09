@@ -6,9 +6,9 @@ import { unauthorized } from '@hapi/boom';
 
 import apiRouter from './routes/apiRouter';
 import app from './app';
-import loggerFactory from './core/loggerFactory';
+import loggerFactory from '../core/loggerFactory';
 
-jest.mock('./core/loggerFactory', () => {
+jest.mock('../core/loggerFactory', () => {
   const logger = { error: jest.fn(), warn: jest.fn() };
 
   return () => logger;
