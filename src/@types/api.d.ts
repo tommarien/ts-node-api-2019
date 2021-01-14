@@ -6,4 +6,4 @@ export type ParamsDictionary = RequestHandler extends RequestHandler<infer X> ? 
 
 export type RouterInstaller = (router: Router) => void;
 
-export type Mapper<S, T> = (src: S) => T;
+export type Mapper<S, T> = (src: Readonly<S>) => T;

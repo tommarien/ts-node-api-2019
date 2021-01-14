@@ -57,6 +57,7 @@
         "ts": "never"
       }
     ],
-    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }]
+    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "no-useless-constructor": "off"
   }
 }
