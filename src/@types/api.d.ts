@@ -8,4 +8,4 @@ export type RouterInstaller = (router: Router) => void;
 
 export type Mapper<S, T> = (src: Readonly<S>) => T;
 
-export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+export type Optional<T, K extends keyof T = keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
