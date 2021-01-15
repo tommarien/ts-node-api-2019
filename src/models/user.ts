@@ -14,7 +14,7 @@ export default class User implements UserAttributes {
   firstName: string;
   lastName: string;
   email: string;
-  birthDate?: Date | undefined;
+  birthDate?: Date;
 
   constructor({ id = v4(), firstName, lastName, email, birthDate }: Optional<UserAttributes, 'id'>) {
     this.id = id;
