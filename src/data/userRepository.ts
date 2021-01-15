@@ -11,7 +11,13 @@ async function save(props: Readonly<UserProps>, client: DbClient = pool): Promis
   const user = new User(props);
 
   await client.query(SQL`
-    INSERT INTO users (id, first_name, last_name, email, birth_date)
+    INSERT INTO users (
+      id,
+      first_name,
+      last_name,
+      email,
+      birth_date
+    )
     VALUES (
       ${user.id},
       ${user.firstName},
@@ -26,7 +32,9 @@ async function save(props: Readonly<UserProps>, client: DbClient = pool): Promis
 
 async function findById(id: string, client: DbClient = pool): Promise<User | null> {
   const { rows } = await client.query(
-    SQL`select id, first_name, last_name, email, birth_date from users where id = ${id}`
+    SQL`SELECT id, first_name, last_name, email, birth_date
+        FROM users
+        where id = ${id}`
   );
 
   if (rows.length === 0) return null;
