@@ -1,25 +1,26 @@
 import { v4 } from 'uuid';
+import { Optional } from '../@types/api';
 
-export type UserProps = {
+type UserAttributes = {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
   birthDate?: Date;
 };
 
-export default class User implements UserProps {
+export default class User implements UserAttributes {
+  readonly id: string;
   firstName: string;
-
   lastName: string;
-
   email: string;
+  birthDate?: Date | undefined;
 
-  birthDate?: Date;
-
-  constructor(params: UserProps, public readonly id: string = v4()) {
-    this.firstName = params.firstName;
-    this.lastName = params.lastName;
-    this.email = params.email;
-    this.birthDate = params.birthDate;
+  constructor({ id = v4(), firstName, lastName, email, birthDate }: Optional<UserAttributes, 'id'>) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.birthDate = birthDate;
   }
 }

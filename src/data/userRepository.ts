@@ -1,15 +1,18 @@
 import SQL from '@nearform/sql';
 import { Mapper } from '../@types/api';
-import User, { UserProps } from '../models/user';
+import User from '../models/user';
 import { DbUser } from './models';
 import pool, { DbClient } from './pool';
 
-const mapToUser: Mapper<DbUser, User> = (src) =>
-  new User({ firstName: src.first_name, lastName: src.last_name, email: src.email, birthDate: src.birth_date }, src.id);
+const mapToUser: Mapper<DbUser, User> = ({
+  id,
+  first_name: firstName,
+  last_name: lastName,
+  email,
+  birth_date: birthDate,
+}) => new User({ id, firstName, lastName, email, birthDate });
 
-async function save(props: Readonly<UserProps>, client: DbClient = pool): Promise<User> {
-  const user = new User(props);
-
+async function save(user: User, client: DbClient = pool): Promise<void> {
   await client.query(SQL`
     INSERT INTO users (
       id,
@@ -26,8 +29,6 @@ async function save(props: Readonly<UserProps>, client: DbClient = pool): Promis
       ${user.birthDate || null}
     )
   `);
-
-  return user;
 }
 
 async function findById(id: string, client: DbClient = pool): Promise<User | null> {
