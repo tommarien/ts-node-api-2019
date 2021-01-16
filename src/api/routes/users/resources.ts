@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { Mapper } from '../../../@types/api';
-import User from '../../../models/user';
+import User from '../../../domain/user';
 import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
 
 export interface UserResource extends UserRequestBodyV1 {

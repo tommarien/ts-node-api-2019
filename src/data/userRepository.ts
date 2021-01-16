@@ -1,6 +1,6 @@
 import SQL from '@nearform/sql';
 import { Mapper } from '../@types/api';
-import User from '../models/user';
+import User from '../domain/user';
 import { DbUser } from './models';
 import pool, { DbClient } from './pool';
 

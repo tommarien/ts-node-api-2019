@@ -4,7 +4,7 @@ import userBodySchema from '../../schemas/src/user.request.body.v1.json';
 import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
 import { userToResourceMapper, UserResource } from './resources';
 import userRepository from '../../../data/userRepository';
-import User from '../../../models/user';
+import User from '../../../domain/user';
 
 const postUserV1: RequestHandler<unknown, UserResource, UserRequestBodyV1> = async (req, res, next): Promise<void> => {
   try {
