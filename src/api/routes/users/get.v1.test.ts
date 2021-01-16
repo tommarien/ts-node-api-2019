@@ -3,13 +3,9 @@ import { v4 } from 'uuid';
 import app from '../../app';
 import pool from '../../../data/pool';
 import dbHelper from '../../../../test/dbHelper';
+import { apiErrorResponse } from '../../../../test/apiError';
 
 const RESOURCE_URI = '/api/v1/users/:id';
-
-const apiErrorResponse = (statusCode: number, error: string) => ({
-  statusCode,
-  error,
-});
 
 describe(`GET ${RESOURCE_URI}`, () => {
   const EXISTING_ID = v4();

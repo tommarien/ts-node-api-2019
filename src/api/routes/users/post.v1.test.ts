@@ -3,13 +3,9 @@ import request from 'supertest';
 import app from '../../app';
 import pool from '../../../data/pool';
 import dbHelper from '../../../../test/dbHelper';
+import { apiErrorResponse } from '../../../../test/apiError';
 
 const RESOURCE_URI = '/api/v1/users';
-
-const apiErrorResponse = (statusCode: number, error: string) => ({
-  statusCode,
-  error,
-});
 
 describe(`POST ${RESOURCE_URI}`, () => {
   function buildValidUser() {
