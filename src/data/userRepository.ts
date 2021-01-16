@@ -10,7 +10,12 @@ const mapToUser: Mapper<DbUser, User> = ({
   last_name: lastName,
   email,
   birth_date: birthDate,
-}) => new User({ id, firstName, lastName, email, birthDate });
+}) => {
+  const user = new User(firstName, lastName, email, id);
+  user.birthDate = birthDate;
+
+  return user;
+};
 
 async function save(user: User, client: DbClient = pool): Promise<void> {
   await client.query(SQL`

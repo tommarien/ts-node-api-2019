@@ -9,13 +9,12 @@ import User from '../../../domain/user';
 const postUserV1: RequestHandler<unknown, UserResource, UserRequestBodyV1> = async (req, res, next): Promise<void> => {
   try {
     const {
-      body: { birthDate, ...rest },
+      body: { firstName, lastName, email, birthDate },
     } = req;
 
-    const user = new User({
-      ...rest,
-      ...(birthDate ? { birthDate: new Date(birthDate) } : {}),
-    });
+    const user = new User(firstName, lastName, email);
+
+    if (birthDate) user.birthDate = new Date(birthDate);
 
     await userRepository.save(user);
 
