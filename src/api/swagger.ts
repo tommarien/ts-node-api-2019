@@ -111,6 +111,42 @@ export default {
           },
         },
       },
+      delete: {
+        operationId: 'deleteUserV1',
+        tags: ['Users'],
+        description: 'Remove a user by id',
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            description: 'The id of the user to remove',
+            required: true,
+            schema: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        ],
+        responses: {
+          '204': {
+            description: 'No Content',
+            headers: {
+              'x-request-id': {
+                $ref: '#/components/headers/RequestId',
+              },
+            },
+          },
+          '400': {
+            $ref: '#/components/responses/BadRequest',
+          },
+          '401': {
+            $ref: '#/components/responses/Unauthorized',
+          },
+          '404': {
+            $ref: '#/components/responses/NotFound',
+          },
+        },
+      },
     },
   },
   components: {

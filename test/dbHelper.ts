@@ -25,8 +25,14 @@ async function insert(tableName: KnownTable, row: Record<string, unknown>): Prom
   await pool.query(sql, values);
 }
 
+async function deleteById(tableName: KnownTable, id: unknown): Promise<void> {
+  // eslint-disable-next-line sql/no-unsafe-query
+  await pool.query(`DELETE FROM ${tableName} WHERE id=$1`, [id]);
+}
+
 export default {
   truncateTable,
   findById,
   insert,
+  deleteById,
 };

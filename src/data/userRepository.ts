@@ -48,7 +48,18 @@ async function findById(id: string, client: DbClient = pool): Promise<User | nul
   return mapToUser(rows[0]);
 }
 
+async function deleteById(id: string, client: DbClient = pool): Promise<boolean> {
+  const { rowCount } = await client.query(
+    SQL`DELETE
+        FROM users
+        where id = ${id}`
+  );
+
+  return rowCount === 1;
+}
+
 export default {
   save,
   findById,
+  deleteById,
 };

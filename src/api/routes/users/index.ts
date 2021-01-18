@@ -1,13 +1,15 @@
 import { RouterInstaller } from '../../../@types/api';
-import get from './get.v1';
-import post from './post.v1';
+import deleteV1 from './delete.v1';
+import getV1 from './get.v1';
+import postV1 from './post.v1';
 
 export const userRouterInstaller: RouterInstaller = (router) => {
   router //
     .route('/v1/users')
-    .post(post);
+    .post(postV1);
 
   router //
     .route('/v1/users/:id')
-    .get(get);
+    .get(getV1)
+    .delete(deleteV1);
 };

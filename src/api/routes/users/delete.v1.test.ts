@@ -7,11 +7,11 @@ import { apiErrorResponse } from '../../../../test/apiError';
 
 const RESOURCE_URI = '/api/v1/users/:id';
 
-describe(`GET ${RESOURCE_URI}`, () => {
+describe(`DELETE ${RESOURCE_URI}`, () => {
   const EXISTING_ID = v4();
 
   function act({ id = EXISTING_ID, apiKey = process.env.ALLOWED_API_KEYS } = {}) {
-    const req = request(app).get(RESOURCE_URI.replace(':id', id));
+    const req = request(app).delete(RESOURCE_URI.replace(':id', id));
 
     if (apiKey) req.set('X-Api-Key', apiKey);
 
@@ -20,7 +20,9 @@ describe(`GET ${RESOURCE_URI}`, () => {
 
   beforeAll(() => dbHelper.truncateTable('users'));
 
-  beforeAll(() =>
+  beforeEach(()=> dbHelper.deleteById('users', EXISTING_ID))
+
+  beforeEach(() =>
     dbHelper.insert('users', {
       id: EXISTING_ID,
       first_name: 'John',
@@ -32,17 +34,12 @@ describe(`GET ${RESOURCE_URI}`, () => {
 
   afterAll(() => pool.end());
 
-  describe('HTTP 200 (OK)', () => {
-    test('it returns the user', async () => {
-      const { body } = await act().expect(200);
+  describe('HTTP 204 (No Content)', () => {
+    test('it deletes the user', async () => {
+      await act().expect(204);
 
-      expect(body).toStrictEqual({
-        id: EXISTING_ID,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@yahoo.com',
-        birthDate: '1980-02-01',
-      });
+      const user = await dbHelper.findById('users', EXISTING_ID);
+      expect(user).toBeUndefined();
     });
   });
 
