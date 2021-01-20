@@ -1,12 +1,12 @@
 import { notFound } from '@hapi/boom';
 import { RequestHandler } from 'express';
-import { ParamsDictionary } from '../../../@types/api';
+import { Params } from '../../../@types/api';
 import userRepository from '../../../data/userRepository';
 import validate from '../../middleware/validate';
 import UuidParamsSchema from '../../schemas/src/uuid.resource.id.params.json';
 import { UuidResourceIdParams } from '../../schemas/types/uuid.resource.id.params';
 
-const deleteUserV1: RequestHandler<UuidResourceIdParams & ParamsDictionary> = async (req, res, next): Promise<void> => {
+const deleteUserV1: RequestHandler<Params<UuidResourceIdParams>> = async (req, res, next): Promise<void> => {
   try {
     const { id } = req.params;
 
