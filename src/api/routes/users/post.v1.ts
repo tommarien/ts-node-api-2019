@@ -1,28 +1,25 @@
-import { RequestHandler } from 'express';
 import validate from '../../middleware/validate';
 import userBodySchema from '../../schemas/src/user.request.body.v1.json';
 import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
 import { userToResourceMapper, UserResource } from './resources';
 import userRepository from '../../../data/userRepository';
 import User from '../../../domain/user';
+import { AsyncRequestHandler } from '../../../@types/api';
+import asyncWrap from '../../middleware/asyncWrap';
 
-const postUserV1: RequestHandler<unknown, UserResource, UserRequestBodyV1> = async (req, res, next): Promise<void> => {
-  try {
-    const {
-      body: { firstName, lastName, email, birthDate },
-    } = req;
+const postUserV1: AsyncRequestHandler<undefined, UserRequestBodyV1, UserResource> = async (req, res) => {
+  const {
+    body: { firstName, lastName, email, birthDate },
+  } = req;
 
-    const user = new User(firstName, lastName, email);
+  const user = new User(firstName, lastName, email);
 
-    if (birthDate) user.birthDate = new Date(birthDate);
+  if (birthDate) user.birthDate = new Date(birthDate);
 
-    await userRepository.save(user);
+  await userRepository.save(user);
 
-    const body = userToResourceMapper(user);
-    res.send(body);
-  } catch (e) {
-    next(e);
-  }
+  const body = userToResourceMapper(user);
+  res.send(body);
 };
 
-export default [validate({ body: userBodySchema }), postUserV1];
+export default [validate({ body: userBodySchema }), asyncWrap(postUserV1)];
