@@ -12,7 +12,8 @@
     "generate": "json2ts -i src/api/schemas/src/ -o src/api/schemas/types/",
     "lint": "concurrently -n tsc,eslint \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
     "migrate": "node -r dotenv/config lib/migrate.js",
-    "serve": "nodemon --exec ts-node --files -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
+    "serve": "tsc-watch --onSuccess \"node --require dotenv/config dist/src/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
+    "serve2": "nodemon --exec ts-node --files -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --runInBand --config jest.config.js"
   },
   "husky": {
@@ -49,14 +50,13 @@
     "jest-junit": "^12.0.0",
     "jest-watch-typeahead": "^0.6.1",
     "lint-staged": "^10.5.3",
-    "nodemon": "^2.0.7",
     "pino-pretty": "^4.3.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "supertest": "^6.1.1",
     "sync-dotenv": "2.6.2",
     "ts-jest": "^26.4.4",
-    "ts-node": "^9.1.1",
+    "tsc-watch": "^4.2.9",
     "typescript": "^4.1.3"
   },
   "dependencies": {
