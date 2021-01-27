@@ -10,7 +10,7 @@
     "build": "yarn run clean && tsc --sourceMap",
     "clean": "rimraf coverage dist",
     "generate": "json2ts -i src/api/schemas/src/ -o src/api/schemas/types/",
-    "lint": "concurrently -n tsc,eslint \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
+    "lint": "concurrently -n tsc,lint, -c \"cyan.bold,green.bold\" \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
     "migrate": "node -r dotenv/config lib/migrate.js",
     "serve": "tsc-watch --onSuccess \"node --require dotenv/config dist/src/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
     "serve2": "nodemon --exec ts-node --files -r dotenv/config src/server.ts | pino-pretty --colorize --translateTime --ignore hostname",
