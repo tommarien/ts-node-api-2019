@@ -36,6 +36,17 @@ async function save(user: User, client: DbClient = pool): Promise<void> {
   `);
 }
 
+async function update(user: User, client: DbClient = pool): Promise<void> {
+  await client.query(SQL`
+    UPDATE users
+      SET first_name=${user.firstName},
+          last_name=${user.lastName},
+          email=${user.email},
+          birth_date=${user.birthDate || null}
+    WHERE id=${user.id}
+  `);
+}
+
 async function findById(id: string, client: DbClient = pool): Promise<User | null> {
   const { rows } = await client.query(
     SQL`SELECT id, first_name, last_name, email, birth_date
@@ -60,6 +71,7 @@ async function deleteById(id: string, client: DbClient = pool): Promise<boolean>
 
 export default {
   save,
+  update,
   findById,
   deleteById,
 };

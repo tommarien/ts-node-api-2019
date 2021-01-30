@@ -111,6 +111,58 @@ export default {
           },
         },
       },
+      put: {
+        operationId: 'putUserV1',
+        tags: ['Users'],
+        description: 'Update a user',
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            description: 'The id of the user to update',
+            required: true,
+            schema: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/components/schemas/UserReqBodyV1',
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'OK',
+            headers: {
+              'x-request-id': {
+                $ref: '#/components/headers/RequestId',
+              },
+            },
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/UserResourceV1',
+                },
+              },
+            },
+          },
+          '400': {
+            $ref: '#/components/responses/BadRequest',
+          },
+          '401': {
+            $ref: '#/components/responses/Unauthorized',
+          },
+          '404': {
+            $ref: '#/components/responses/NotFound',
+          },
+        },
+      },
       delete: {
         operationId: 'deleteUserV1',
         tags: ['Users'],
