@@ -25,8 +25,8 @@ const postUserV1: AsyncRequestHandler<UuidResourceIdParams, UserRequestBodyV1, U
 
   await userRepository.update(user);
 
-  const body = userToResourceMapper(user);
-  res.send(body);
+  const reply = userToResourceMapper(user);
+  res.send(reply);
 };
 
 export default [validate({ params: UuidParamsSchema, body: userBodySchema }), asyncWrap(postUserV1)];

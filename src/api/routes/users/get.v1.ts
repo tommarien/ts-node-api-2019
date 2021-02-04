@@ -7,14 +7,14 @@ import { UuidResourceIdParams } from '../../schemas/types/uuid.resource.id.param
 import asyncWrap from '../../middleware/asyncWrap';
 import { AsyncRequestHandler } from '../../../@types/api';
 
-export const getUserV1: AsyncRequestHandler<UuidResourceIdParams, undefined, UserResource> = async (req, res) => {
+export const getUserV1: AsyncRequestHandler<UuidResourceIdParams, unknown, UserResource> = async (req, res) => {
   const { id } = req.params;
 
   const user = await userRepository.findById(id);
   if (!user) throw notFound(`A "user" resource identified with "${id}" was not found`);
 
-  const body = userToResourceMapper(user);
-  res.send(body);
+  const reply = userToResourceMapper(user);
+  res.send(reply);
 };
 
 export default [validate({ params: UuidParamsSchema }), asyncWrap(getUserV1)];

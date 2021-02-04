@@ -7,19 +7,18 @@ import User from '../../../domain/user';
 import { AsyncRequestHandler } from '../../../@types/api';
 import asyncWrap from '../../middleware/asyncWrap';
 
-const postUserV1: AsyncRequestHandler<undefined, UserRequestBodyV1, UserResource> = async (req, res) => {
+const postUserV1: AsyncRequestHandler<unknown, UserRequestBodyV1, UserResource> = async (req, res) => {
   const {
     body: { firstName, lastName, email, birthDate },
   } = req;
 
   const user = new User(firstName, lastName, email);
-
   if (birthDate) user.birthDate = new Date(birthDate);
 
   await userRepository.save(user);
 
-  const body = userToResourceMapper(user);
-  res.send(body);
+  const reply = userToResourceMapper(user);
+  res.send(reply);
 };
 
 export default [validate({ body: userBodySchema }), asyncWrap(postUserV1)];
