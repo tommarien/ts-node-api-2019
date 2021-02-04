@@ -17,61 +17,62 @@ const mapToUser: Mapper<DbUser, User> = ({
   return user;
 };
 
-async function save(user: User, client: DbClient = pool): Promise<void> {
-  await client.query(SQL`
-    INSERT INTO users (
-      id,
-      first_name,
-      last_name,
-      email,
-      birth_date
-    )
-    VALUES (
-      ${user.id},
-      ${user.firstName},
-      ${user.lastName},
-      ${user.email},
-      ${user.birthDate || null}
-    )
-  `);
+export class UserRepository {
+  constructor(private client: DbClient = pool) {}
+
+  async findById(id: string): Promise<User | null> {
+    const { rows } = await this.client.query(
+      SQL`SELECT id, first_name, last_name, email, birth_date
+          FROM users
+          where id = ${id}`
+    );
+
+    if (rows.length === 0) return null;
+
+    return mapToUser(rows[0]);
+  }
+
+  async add(user: User): Promise<void> {
+    await this.client.query(SQL`
+      INSERT INTO users (
+        id,
+        first_name,
+        last_name,
+        email,
+        birth_date
+      )
+      VALUES (
+        ${user.id},
+        ${user.firstName},
+        ${user.lastName},
+        ${user.email},
+        ${user.birthDate || null}
+      )
+    `);
+  }
+
+  async update(user: User): Promise<boolean> {
+    const { rowCount } = await this.client.query(SQL`
+      UPDATE users
+        SET first_name=${user.firstName},
+            last_name=${user.lastName},
+            email=${user.email},
+            birth_date=${user.birthDate || null}
+      WHERE id=${user.id}
+    `);
+
+    return rowCount === 1;
+  }
+
+  async removeById(id: string): Promise<boolean> {
+    const { rowCount } = await this.client.query(
+      SQL`DELETE
+          FROM users
+          where id = ${id}`
+    );
+
+    return rowCount === 1;
+  }
 }
 
-async function update(user: User, client: DbClient = pool): Promise<void> {
-  await client.query(SQL`
-    UPDATE users
-      SET first_name=${user.firstName},
-          last_name=${user.lastName},
-          email=${user.email},
-          birth_date=${user.birthDate || null}
-    WHERE id=${user.id}
-  `);
-}
-
-async function findById(id: string, client: DbClient = pool): Promise<User | null> {
-  const { rows } = await client.query(
-    SQL`SELECT id, first_name, last_name, email, birth_date
-        FROM users
-        where id = ${id}`
-  );
-
-  if (rows.length === 0) return null;
-
-  return mapToUser(rows[0]);
-}
-
-async function deleteById(id: string, client: DbClient = pool): Promise<boolean> {
-  const { rowCount } = await client.query(
-    SQL`DELETE
-        FROM users
-        where id = ${id}`
-  );
-
-  return rowCount === 1;
-}
-
-export default {
-  save,
-  update,
-  findById,
-  deleteById,
-};
+export default new UserRepository();

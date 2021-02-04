@@ -9,7 +9,7 @@ import { UuidResourceIdParams } from '../../schemas/types/uuid.resource.id.param
 const deleteUserV1: AsyncRequestHandler<UuidResourceIdParams> = async (req, res) => {
   const { id } = req.params;
 
-  const deleted = await userRepository.deleteById(id);
+  const deleted = await userRepository.removeById(id);
   if (!deleted) throw notFound(`A "user" resource identified with "${id}" was not found`);
 
   res.sendStatus(204);

@@ -2,10 +2,10 @@ import validate from '../../middleware/validate';
 import userBodySchema from '../../schemas/src/user.request.body.v1.json';
 import { UserRequestBodyV1 } from '../../schemas/types/user.request.body.v1';
 import { userToResourceMapper, UserResource } from './resources';
-import userRepository from '../../../data/userRepository';
 import User from '../../../domain/user';
 import { AsyncRequestHandler } from '../../../@types/api';
 import asyncWrap from '../../middleware/asyncWrap';
+import userRepository from '../../../data/userRepository';
 
 const postUserV1: AsyncRequestHandler<unknown, UserRequestBodyV1, UserResource> = async (req, res) => {
   const {
@@ -15,7 +15,7 @@ const postUserV1: AsyncRequestHandler<unknown, UserRequestBodyV1, UserResource> 
   const user = new User(firstName, lastName, email);
   if (birthDate) user.birthDate = new Date(birthDate);
 
-  await userRepository.save(user);
+  await userRepository.add(user);
 
   const reply = userToResourceMapper(user);
   res.send(reply);
