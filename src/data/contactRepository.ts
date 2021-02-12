@@ -1,26 +1,26 @@
 import SQL from '@nearform/sql';
 import { Mapper } from '../@types/api';
-import User from '../domain/user';
-import { DbUser } from './models';
+import Contact from '../domain/contact';
+import { ContactRecord } from './models';
 import pool, { DbClient } from './pool';
 
-const mapToUser: Mapper<DbUser, User> = ({
+const map: Mapper<ContactRecord, Contact> = ({
   id,
   first_name: firstName,
   last_name: lastName,
   email,
   birth_date: birthDate,
 }) => {
-  const user = new User(firstName, lastName, email, id);
-  user.birthDate = birthDate;
+  const contact = new Contact(firstName, lastName, email, id);
+  contact.birthDate = birthDate;
 
-  return user;
+  return contact;
 };
 
-export class UserRepository {
+export class ContactRepository {
   constructor(private client: DbClient = pool) {}
 
-  async findById(id: string): Promise<User | null> {
+  async findById(id: string): Promise<Contact | null> {
     const { rows } = await this.client.query(
       SQL`SELECT id, first_name, last_name, email, birth_date
           FROM contacts
@@ -29,10 +29,10 @@ export class UserRepository {
 
     if (rows.length === 0) return null;
 
-    return mapToUser(rows[0]);
+    return map(rows[0]);
   }
 
-  async add(user: User): Promise<void> {
+  async add(contact: Contact): Promise<void> {
     await this.client.query(SQL`
       INSERT INTO contacts (
         id,
@@ -42,23 +42,23 @@ export class UserRepository {
         birth_date
       )
       VALUES (
-        ${user.id},
-        ${user.firstName},
-        ${user.lastName},
-        ${user.email},
-        ${user.birthDate || null}
+        ${contact.id},
+        ${contact.firstName},
+        ${contact.lastName},
+        ${contact.email},
+        ${contact.birthDate || null}
       )
     `);
   }
 
-  async update(user: User): Promise<boolean> {
+  async update(contact: Contact): Promise<boolean> {
     const { rowCount } = await this.client.query(SQL`
       UPDATE contacts
-        SET first_name=${user.firstName},
-            last_name=${user.lastName},
-            email=${user.email},
-            birth_date=${user.birthDate || null}
-      WHERE id=${user.id}
+        SET first_name=${contact.firstName},
+            last_name=${contact.lastName},
+            email=${contact.email},
+            birth_date=${contact.birthDate || null}
+      WHERE id=${contact.id}
     `);
 
     return rowCount === 1;
@@ -75,4 +75,4 @@ export class UserRepository {
   }
 }
 
-export default new UserRepository();
+export default new ContactRepository();

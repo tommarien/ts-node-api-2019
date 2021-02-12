@@ -1,12 +1,12 @@
+import { parse } from 'date-fns';
 import request from 'supertest';
 import { v4 } from 'uuid';
-import { parse } from 'date-fns';
-import app from '../../app';
-import pool from '../../../data/pool';
-import dbHelper from '../../../../test/dbHelper';
 import { apiErrorResponse } from '../../../../test/apiError';
+import dbHelper from '../../../../test/dbHelper';
+import pool from '../../../data/pool';
+import app from '../../app';
 
-const RESOURCE_URI = '/api/v1/users/:id';
+const RESOURCE_URI = '/api/v1/contacts/:id';
 
 type Body = {
   firstName: string;
@@ -48,50 +48,50 @@ describe(`PUT ${RESOURCE_URI}`, () => {
   afterAll(() => pool.end());
 
   describe('HTTP 200 (OK)', () => {
-    test('it returns the status and updates the user with minimum props', async () => {
-      const user = buildValidBody();
+    test('it returns the status and updates the contact with minimum props', async () => {
+      const contact = buildValidBody();
 
-      const { body } = await act({ data: user }).expect(200);
+      const { body } = await act({ data: contact }).expect(200);
 
       expect(body).toStrictEqual({
         id: EXISTING_ID,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
       });
 
       const row = await dbHelper.findById('contacts', EXISTING_ID);
 
       expect(row).toStrictEqual({
         id: EXISTING_ID,
-        first_name: user.firstName,
-        last_name: user.lastName,
-        email: user.email,
+        first_name: contact.firstName,
+        last_name: contact.lastName,
+        email: contact.email,
         birth_date: null,
       });
     });
 
-    test('it returns the status and updates the user with all props', async () => {
-      const user = { ...buildValidBody(), birthDate: '1980-09-15' };
+    test('it returns the status and updates the contact with all props', async () => {
+      const contact = { ...buildValidBody(), birthDate: '1980-09-15' };
 
-      const { body } = await act({ data: user }).expect(200);
+      const { body } = await act({ data: contact }).expect(200);
 
       expect(body).toStrictEqual({
         id: EXISTING_ID,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        birthDate: user.birthDate,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        birthDate: contact.birthDate,
       });
 
       const row = await dbHelper.findById('contacts', EXISTING_ID);
 
       expect(row).toStrictEqual({
         id: body.id,
-        first_name: user.firstName,
-        last_name: user.lastName,
-        email: user.email,
-        birth_date: parse(user.birthDate, 'yyyy-MM-dd', new Date()),
+        first_name: contact.firstName,
+        last_name: contact.lastName,
+        email: contact.email,
+        birth_date: parse(contact.birthDate, 'yyyy-MM-dd', new Date()),
       });
     });
   });
@@ -196,13 +196,13 @@ describe(`PUT ${RESOURCE_URI}`, () => {
   });
 
   describe('HTTP 404 (Not Found)', () => {
-    test('it returns the status if a user with the id does not exist', async () => {
+    test('it returns the status if a contact with the id does not exist', async () => {
       const id = v4();
       const { body } = await act({ id }).expect(404);
 
       expect(body).toStrictEqual({
         ...apiErrorResponse(404, 'Not Found'),
-        message: `A "user" resource identified with "${id}" was not found`,
+        message: `A "contact" resource identified with "${id}" was not found`,
       });
     });
   });

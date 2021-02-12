@@ -1,14 +1,14 @@
 import { parse } from 'date-fns';
 import request from 'supertest';
-import app from '../../app';
-import pool from '../../../data/pool';
-import dbHelper from '../../../../test/dbHelper';
 import { apiErrorResponse } from '../../../../test/apiError';
+import dbHelper from '../../../../test/dbHelper';
+import pool from '../../../data/pool';
+import app from '../../app';
 
-const RESOURCE_URI = '/api/v1/users';
+const RESOURCE_URI = '/api/v1/contacts';
 
 describe(`POST ${RESOURCE_URI}`, () => {
-  function buildValidUser() {
+  function buildValidBody() {
     return {
       firstName: 'John',
       lastName: 'Doe',
@@ -29,16 +29,16 @@ describe(`POST ${RESOURCE_URI}`, () => {
   afterAll(() => pool.end());
 
   describe('HTTP 200 (OK)', () => {
-    test('it returns the status and stores a new user with minimum props', async () => {
-      const user = buildValidUser();
+    test('it returns the status and stores a new contact with minimum props', async () => {
+      const contact = buildValidBody();
 
-      const { body } = await act({ data: user }).expect(200);
+      const { body } = await act({ data: contact }).expect(200);
 
       expect(body).toStrictEqual({
         id: expect.any(String),
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
       });
 
       const row = await dbHelper.findById('contacts', body.id);
@@ -52,17 +52,17 @@ describe(`POST ${RESOURCE_URI}`, () => {
       });
     });
 
-    test('it returns the status and stores a new user with all props', async () => {
-      const user = { ...buildValidUser(), birthDate: '1980-09-15' };
+    test('it returns the status and stores a new contact with all props', async () => {
+      const contact = { ...buildValidBody(), birthDate: '1980-09-15' };
 
-      const { body } = await act({ data: user }).expect(200);
+      const { body } = await act({ data: contact }).expect(200);
 
       expect(body).toStrictEqual({
         id: expect.any(String),
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        birthDate: user.birthDate,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        birthDate: contact.birthDate,
       });
 
       const row = await dbHelper.findById('contacts', body.id);
@@ -80,7 +80,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
   describe('HTTP 400 (Bad Request)', () => {
     describe('firstName', () => {
       test('it returns the status if not given', async () => {
-        const { firstName, ...rest } = buildValidUser();
+        const { firstName, ...rest } = buildValidBody();
 
         const { body } = await act({ data: { ...rest } }).expect(400);
 
@@ -91,7 +91,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
       });
 
       test('it returns the status if longer than 30 chars', async () => {
-        const { body } = await act({ data: { ...buildValidUser(), firstName: 'a'.repeat(31) } }).expect(400);
+        const { body } = await act({ data: { ...buildValidBody(), firstName: 'a'.repeat(31) } }).expect(400);
 
         expect(body).toStrictEqual({
           ...apiErrorResponse(400, 'Bad Request'),
@@ -102,7 +102,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
 
     describe('lastName', () => {
       test('it returns the status if not given', async () => {
-        const { lastName, ...rest } = buildValidUser();
+        const { lastName, ...rest } = buildValidBody();
 
         const { body } = await act({ data: { ...rest } }).expect(400);
 
@@ -113,7 +113,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
       });
 
       test('it returns the status if longer than 80 chars', async () => {
-        const { body } = await act({ data: { ...buildValidUser(), lastName: 'a'.repeat(81) } }).expect(400);
+        const { body } = await act({ data: { ...buildValidBody(), lastName: 'a'.repeat(81) } }).expect(400);
 
         expect(body).toStrictEqual({
           ...apiErrorResponse(400, 'Bad Request'),
@@ -124,7 +124,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
 
     describe('birthDate', () => {
       test('it returns the status if not an iso date', async () => {
-        const { body } = await act({ data: { ...buildValidUser(), birthDate: '2020-13-12' } }).expect(400);
+        const { body } = await act({ data: { ...buildValidBody(), birthDate: '2020-13-12' } }).expect(400);
 
         expect(body).toStrictEqual({
           ...apiErrorResponse(400, 'Bad Request'),
@@ -135,7 +135,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
 
     describe('email', () => {
       test('it returns the status if not an email', async () => {
-        const { body } = await act({ data: { ...buildValidUser(), email: 'not-an-email' } }).expect(400);
+        const { body } = await act({ data: { ...buildValidBody(), email: 'not-an-email' } }).expect(400);
 
         expect(body).toStrictEqual({
           ...apiErrorResponse(400, 'Bad Request'),
@@ -144,7 +144,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
       });
 
       test('it returns the status if longer than 120 chars', async () => {
-        const { body } = await act({ data: { ...buildValidUser(), email: `${'a'.repeat(117)}@a.b` } }).expect(400);
+        const { body } = await act({ data: { ...buildValidBody(), email: `${'a'.repeat(117)}@a.b` } }).expect(400);
 
         expect(body).toStrictEqual({
           ...apiErrorResponse(400, 'Bad Request'),
@@ -156,7 +156,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
 
   describe('HTTP 401 (Unauthorized)', () => {
     test('it returns the status if the api key is missing', async () => {
-      const { body } = await act({ data: buildValidUser(), apiKey: '' }).expect(401);
+      const { body } = await act({ data: buildValidBody(), apiKey: '' }).expect(401);
 
       expect(body).toStrictEqual({
         ...apiErrorResponse(401, 'Unauthorized'),

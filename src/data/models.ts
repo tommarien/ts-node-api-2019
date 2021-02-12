@@ -1,6 +1,4 @@
-/* eslint-disable camelcase */
-
-export type DbUser = {
+export type ContactRecord = {
   id: string;
   first_name: string;
   last_name: string;

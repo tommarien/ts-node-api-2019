@@ -17,8 +17,11 @@
     "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
     "sourceType": "module" // Allows for the use of imports
   },
-  "plugins":["sql"],
+  "plugins": [
+    "sql"
+  ],
   "rules": {
+    "camelcase": "warn",
     "sql/format": [
       2,
       {
@@ -57,7 +60,12 @@
         "ts": "never"
       }
     ],
-    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
     "no-useless-constructor": "off",
     "lines-between-class-members": "off"
   }

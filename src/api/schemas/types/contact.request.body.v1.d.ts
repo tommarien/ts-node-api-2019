@@ -5,7 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface UserRequestBodyV1 {
+export interface ContactRequestBodyV1 {
   firstName: string;
   lastName: string;
   birthDate?: string;

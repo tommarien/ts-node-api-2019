@@ -1,4 +1,4 @@
-import UserReqBodyV1 from './schemas/src/user.request.body.v1.json';
+import ContactReqBodyV1 from './schemas/src/contact.request.body.v1.json';
 
 export default {
   openapi: '3.0.0',
@@ -13,8 +13,8 @@ export default {
   },
   tags: [
     {
-      name: 'Users',
-      description: 'User Management',
+      name: 'Contacts',
+      description: 'Contact Management',
     },
   ],
   servers: [
@@ -28,16 +28,16 @@ export default {
     },
   ],
   paths: {
-    '/v1/users': {
+    '/v1/contacts': {
       post: {
-        operationId: 'postUserV1',
-        tags: ['Users'],
-        description: 'Create a new user',
+        operationId: 'postContactV1',
+        tags: ['Contacts'],
+        description: 'Create a new contact',
         requestBody: {
           content: {
             'application/json': {
               schema: {
-                $ref: '#/components/schemas/UserReqBodyV1',
+                $ref: '#/components/schemas/ContactReqBodyV1',
               },
             },
           },
@@ -53,7 +53,7 @@ export default {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/UserResourceV1',
+                  $ref: '#/components/schemas/ContactResourceV1',
                 },
               },
             },
@@ -67,16 +67,16 @@ export default {
         },
       },
     },
-    '/v1/users/{id}': {
+    '/v1/contacts/{id}': {
       get: {
-        operationId: 'getUserV1',
-        tags: ['Users'],
-        description: 'Find a user by id',
+        operationId: 'getContactV1',
+        tags: ['Contacts'],
+        description: 'Find a contact by id',
         parameters: [
           {
             name: 'id',
             in: 'path',
-            description: 'The id of the user to return',
+            description: 'The id of the contact to return',
             required: true,
             schema: {
               type: 'string',
@@ -95,7 +95,7 @@ export default {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/UserResourceV1',
+                  $ref: '#/components/schemas/ContactResourceV1',
                 },
               },
             },
@@ -112,14 +112,14 @@ export default {
         },
       },
       put: {
-        operationId: 'putUserV1',
-        tags: ['Users'],
-        description: 'Update a user',
+        operationId: 'putContactV1',
+        tags: ['Contacts'],
+        description: 'Update a contact',
         parameters: [
           {
             name: 'id',
             in: 'path',
-            description: 'The id of the user to update',
+            description: 'The id of the contact to update',
             required: true,
             schema: {
               type: 'string',
@@ -131,7 +131,7 @@ export default {
           content: {
             'application/json': {
               schema: {
-                $ref: '#/components/schemas/UserReqBodyV1',
+                $ref: '#/components/schemas/ContactReqBodyV1',
               },
             },
           },
@@ -147,7 +147,7 @@ export default {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/UserResourceV1',
+                  $ref: '#/components/schemas/ContactReqBodyV1',
                 },
               },
             },
@@ -164,14 +164,14 @@ export default {
         },
       },
       delete: {
-        operationId: 'deleteUserV1',
-        tags: ['Users'],
-        description: 'Remove a user by id',
+        operationId: 'deleteContactV1',
+        tags: ['Contacts'],
+        description: 'Remove a contact by id',
         parameters: [
           {
             name: 'id',
             in: 'path',
-            description: 'The id of the user to remove',
+            description: 'The id of the contact to remove',
             required: true,
             schema: {
               type: 'string',
@@ -288,8 +288,8 @@ export default {
         },
         required: ['statusCode', 'error'],
       },
-      UserReqBodyV1,
-      UserResourceV1: {
+      ContactReqBodyV1,
+      ContactResourceV1: {
         allOf: [
           {
             type: 'object',
@@ -302,7 +302,7 @@ export default {
             required: ['id'],
           },
           {
-            $ref: '#/components/schemas/UserReqBodyV1',
+            $ref: '#/components/schemas/ContactReqBodyV1',
           },
         ],
       },

@@ -1,11 +1,11 @@
 import request from 'supertest';
 import { v4 } from 'uuid';
-import app from '../../app';
-import pool from '../../../data/pool';
-import dbHelper from '../../../../test/dbHelper';
 import { apiErrorResponse } from '../../../../test/apiError';
+import dbHelper from '../../../../test/dbHelper';
+import pool from '../../../data/pool';
+import app from '../../app';
 
-const RESOURCE_URI = '/api/v1/users/:id';
+const RESOURCE_URI = '/api/v1/contacts/:id';
 
 describe(`DELETE ${RESOURCE_URI}`, () => {
   const EXISTING_ID = v4();
@@ -20,7 +20,7 @@ describe(`DELETE ${RESOURCE_URI}`, () => {
 
   beforeAll(() => dbHelper.truncateTable('contacts'));
 
-  beforeEach(()=> dbHelper.deleteById('contacts', EXISTING_ID))
+  beforeEach(() => dbHelper.deleteById('contacts', EXISTING_ID));
 
   beforeEach(() =>
     dbHelper.insert('contacts', {
@@ -35,11 +35,11 @@ describe(`DELETE ${RESOURCE_URI}`, () => {
   afterAll(() => pool.end());
 
   describe('HTTP 204 (No Content)', () => {
-    test('it deletes the user', async () => {
+    test('it deletes the contact', async () => {
       await act().expect(204);
 
-      const user = await dbHelper.findById('contacts', EXISTING_ID);
-      expect(user).toBeUndefined();
+      const contact = await dbHelper.findById('contacts', EXISTING_ID);
+      expect(contact).toBeUndefined();
     });
   });
 
@@ -68,13 +68,13 @@ describe(`DELETE ${RESOURCE_URI}`, () => {
   });
 
   describe('HTTP 404 (Not Found)', () => {
-    test('it returns the status if a user with the id does not exist', async () => {
+    test('it returns the status if a contact with the id does not exist', async () => {
       const id = v4();
       const { body } = await act({ id }).expect(404);
 
       expect(body).toStrictEqual({
         ...apiErrorResponse(404, 'Not Found'),
-        message: `A "user" resource identified with "${id}" was not found`,
+        message: `A "contact" resource identified with "${id}" was not found`,
       });
     });
   });

@@ -1,7 +1,6 @@
-/* eslint-disable max-classes-per-file */
 import { v4 } from 'uuid';
 
-export default class User {
+export default class Contact {
   birthDate?: Date;
 
   constructor(

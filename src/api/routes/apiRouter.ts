@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import apiKeyAuth from '../middleware/apiKeyAuth';
-import { userRouterInstaller } from './users';
+import { contactRouterInstaller } from './contacts';
 
 const apiRouter = Router();
 
@@ -8,6 +8,6 @@ const apiRouter = Router();
 apiRouter.use(apiKeyAuth);
 
 // Register routes
-userRouterInstaller(apiRouter);
+contactRouterInstaller(apiRouter);
 
 export default apiRouter;
