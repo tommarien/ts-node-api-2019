@@ -44,7 +44,7 @@ jobs:
 
       - run: yarn install
 
-      - run: yarn migrate up --db=$PGDATABASE
+      - run: yarn migrate up
 
       - run: mkdir ~/jest
 
