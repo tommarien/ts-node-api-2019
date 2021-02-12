@@ -1,12 +1,11 @@
-import { mocked } from 'ts-jest/utils';
-import { Router } from 'express';
-import { v4 } from 'uuid';
-import request from 'supertest';
 import { unauthorized } from '@hapi/boom';
-
-import apiRouter from './routes/apiRouter';
-import app from './app';
+import { Router } from 'express';
+import request from 'supertest';
+import { mocked } from 'ts-jest/utils';
+import { v4 } from 'uuid';
 import loggerFactory from '../core/loggerFactory';
+import app from './app';
+import apiRouter from './routes/apiRouter';
 
 jest.mock('../core/loggerFactory', () => {
   const logger = { error: jest.fn(), warn: jest.fn() };

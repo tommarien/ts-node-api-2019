@@ -1,6 +1,5 @@
-import { ErrorRequestHandler } from 'express';
 import { boomify } from '@hapi/boom';
-
+import { ErrorRequestHandler } from 'express';
 import loggerFactory from '../../core/loggerFactory';
 
 const logger = loggerFactory('errorHandler');

@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-
 import loggerFactory from '../../core/loggerFactory';
 
 const logger = loggerFactory('apiKeyAuthentication');

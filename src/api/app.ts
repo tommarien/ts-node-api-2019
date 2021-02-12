@@ -1,10 +1,10 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import apiRouter from './routes/apiRouter';
 import catchAll from './middleware/catchAll';
 import enforceHttps from './middleware/enforceHttps';
 import errorHandler from './middleware/errorHandler';
 import requestId from './middleware/requestId';
+import apiRouter from './routes/apiRouter';
 import swaggerDocument from './swagger';
 
 const app = express();

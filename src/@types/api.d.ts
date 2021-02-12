@@ -1,7 +1,6 @@
+import { Request, Response, Router } from 'express';
 // eslint-disable-next-line import/no-unresolved
 import * as core from 'express-serve-static-core';
-
-import { Request, Response, Router } from 'express';
 
 export type Environment = 'local' | 'dev' | 'sta' | 'pro';
 
