@@ -52,6 +52,40 @@ jobs:
 
       - store_test_results:
           path: ~/jest
+  deploy-to-heroku:
+    executor: node_lts
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-v14-{{ checksum "yarn.lock" }}
+
+      - run: yarn build
+      # add installed SSH key using the unique fingerprint
+      - add_ssh_keys:
+          fingerprints:
+              - "ff:ed:4a:ed:6e:ff:75:c1:07:67:9a:e8:f6:4c:da:7c"
+
+      # set up heroku for deployment
+      - run: bash .circleci/setup-heroku.sh
+
+      - run:
+          name: Configure Git
+          command: |
+              git config user.name ${CIRCLE_USERNAME}
+              git config user.email $GIT_EMAIL
+      # deploy to Heroku
+      - run:
+          name: Deploy to Heroku
+          command: |
+              cd dist
+              git add -A
+              git commit -m 'Created Build'
+              # check local branch to determine what Heroku git to use
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                  git remote add heroku https://git.heroku.com/ts-node-api-tm.git
+                  git push -f heroku ${CIRCLE_BRANCH}:master
+              fi
 workflows:
   version: 2
   complete:
@@ -60,3 +94,18 @@ workflows:
       - test:
           requires:
             - build
+      - hold:
+          type: approval
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - heroku/deploy-via-git:
+          requires:
+            - hold
+          filters:
+            branches:
+              only:
+                - master
