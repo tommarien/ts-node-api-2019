@@ -13,12 +13,8 @@
     "lint": "concurrently -n tsc,lint, -c \"cyan.bold,green.bold\" \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
     "migrate": "node -r dotenv/config lib/migrate.js",
     "serve": "yarn run clean && tsc-watch --project tsconfig.prod.json --onSuccess \"node --require dotenv/config dist/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
-    "test": "jest --runInBand --config jest.config.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test": "jest --runInBand --config jest.config.js",
+    "postinstall": "husky install"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint"
