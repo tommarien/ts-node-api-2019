@@ -102,7 +102,7 @@ workflows:
             branches:
               only:
                 - master
-      - heroku/deploy-via-git:
+      - deploy-to-heroku:
           requires:
             - hold
           filters:
