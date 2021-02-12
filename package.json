@@ -11,7 +11,7 @@
     "clean": "rimraf coverage dist",
     "generate": "json2ts -i src/api/schemas/src/ -o src/api/schemas/types/",
     "lint": "concurrently -n tsc,lint, -c \"cyan.bold,green.bold\" \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts --quiet ./\"",
-    "migrate": "node-pg-migrate --migration-filename-format utc --tsconfig tsconfig.json",
+    "migrate": "node-pg-migrate --migration-filename-format utc --tsconfig tsconfig.json --no-check-order",
     "migrate:test" : "PGDATABASE=ts-node-api-test yarn migrate",
     "serve": "yarn run clean && tsc-watch --project tsconfig.prod.json --onSuccess \"node --require dotenv/config dist/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --runInBand --config jest.config.js",
