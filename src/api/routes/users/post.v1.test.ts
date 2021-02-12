@@ -24,7 +24,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
     return req;
   }
 
-  beforeAll(() => dbHelper.truncateTable('users'));
+  beforeAll(() => dbHelper.truncateTable('contacts'));
 
   afterAll(() => pool.end());
 
@@ -41,7 +41,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
         email: user.email,
       });
 
-      const row = await dbHelper.findById('users', body.id);
+      const row = await dbHelper.findById('contacts', body.id);
 
       expect(row).toStrictEqual({
         id: body.id,
@@ -65,7 +65,7 @@ describe(`POST ${RESOURCE_URI}`, () => {
         birthDate: user.birthDate,
       });
 
-      const row = await dbHelper.findById('users', body.id);
+      const row = await dbHelper.findById('contacts', body.id);
 
       expect(row).toStrictEqual({
         id: body.id,

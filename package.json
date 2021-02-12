@@ -11,7 +11,8 @@
     "clean": "rimraf coverage dist",
     "generate": "json2ts -i src/api/schemas/src/ -o src/api/schemas/types/",
     "lint": "concurrently -n tsc,lint, -c \"cyan.bold,green.bold\" \"tsc --noEmit --pretty\" \"eslint --ext .js,.ts ./\"",
-    "migrate": "node -r dotenv/config lib/migrate.js",
+    "migrate": "node-pg-migrate --migration-filename-format utc --tsconfig tsconfig.json",
+    "migrate:test" : "PGDATABASE=ts-node-api-test yarn migrate",
     "serve": "yarn run clean && tsc-watch --project tsconfig.prod.json --onSuccess \"node --require dotenv/config dist/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --runInBand --config jest.config.js",
     "postinstall": "husky install"
@@ -29,7 +30,6 @@
     "@types/pino": "^6.3.5",
     "@types/supertest": "^2.0.10",
     "@types/uuid": "^8.3.0",
-    "@types/yargs": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
     "concurrently": "^5.3.0",
@@ -63,12 +63,11 @@
     "express": "^4.17.1",
     "http-terminator": "^3.0.0",
     "json-schema-to-typescript": "^10.1.3",
-    "lodash.kebabcase": "^4.1.1",
+    "node-pg-migrate": "^5.9.0",
     "pg": "8.5.1",
     "pino": "^6.11.1",
-    "postgrator": "^4.1.1",
     "swagger-ui-express": "^4.1.6",
-    "uuid": "^8.3.2",
-    "yargs": "^16.2.0"
+    "ts-node": "^9.1.1",
+    "uuid": "^8.3.2"
   }
 }

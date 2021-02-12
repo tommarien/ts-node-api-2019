@@ -23,7 +23,7 @@ export class UserRepository {
   async findById(id: string): Promise<User | null> {
     const { rows } = await this.client.query(
       SQL`SELECT id, first_name, last_name, email, birth_date
-          FROM users
+          FROM contacts
           where id = ${id}`
     );
 
@@ -34,7 +34,7 @@ export class UserRepository {
 
   async add(user: User): Promise<void> {
     await this.client.query(SQL`
-      INSERT INTO users (
+      INSERT INTO contacts (
         id,
         first_name,
         last_name,
@@ -53,7 +53,7 @@ export class UserRepository {
 
   async update(user: User): Promise<boolean> {
     const { rowCount } = await this.client.query(SQL`
-      UPDATE users
+      UPDATE contacts
         SET first_name=${user.firstName},
             last_name=${user.lastName},
             email=${user.email},
@@ -67,7 +67,7 @@ export class UserRepository {
   async removeById(id: string): Promise<boolean> {
     const { rowCount } = await this.client.query(
       SQL`DELETE
-          FROM users
+          FROM contacts
           where id = ${id}`
     );
 

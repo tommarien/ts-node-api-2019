@@ -18,10 +18,10 @@ describe(`GET ${RESOURCE_URI}`, () => {
     return req;
   }
 
-  beforeAll(() => dbHelper.truncateTable('users'));
+  beforeAll(() => dbHelper.truncateTable('contacts'));
 
   beforeAll(() =>
-    dbHelper.insert('users', {
+    dbHelper.insert('contacts', {
       id: EXISTING_ID,
       first_name: 'John',
       last_name: 'Doe',

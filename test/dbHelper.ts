@@ -1,7 +1,7 @@
 import { DbUser } from '../src/data/models';
 import pool from '../src/data/pool';
 
-type KnownTable = 'users';
+type KnownTable = 'contacts';
 
 async function truncateTable(tableName: KnownTable): Promise<void> {
   await pool.query(`TRUNCATE TABLE ${tableName}`);
@@ -14,7 +14,7 @@ async function findById(tableName: KnownTable, id: unknown): Promise<Record<stri
   return rows[0];
 }
 
-function insert(tableName: 'users', row: DbUser): Promise<void>;
+function insert(tableName: 'contacts', row: DbUser): Promise<void>;
 async function insert(tableName: KnownTable, row: Record<string, unknown>): Promise<void> {
   const columns = Object.keys(row);
   const values = Object.values(row).map((v) => (v === undefined ? null : v));

@@ -34,10 +34,10 @@ describe(`PUT ${RESOURCE_URI}`, () => {
     return req;
   }
 
-  beforeEach(() => dbHelper.truncateTable('users'));
+  beforeEach(() => dbHelper.truncateTable('contacts'));
 
   beforeEach(() =>
-    dbHelper.insert('users', {
+    dbHelper.insert('contacts', {
       id: EXISTING_ID,
       first_name: 'John',
       last_name: 'Doe',
@@ -60,7 +60,7 @@ describe(`PUT ${RESOURCE_URI}`, () => {
         email: user.email,
       });
 
-      const row = await dbHelper.findById('users', EXISTING_ID);
+      const row = await dbHelper.findById('contacts', EXISTING_ID);
 
       expect(row).toStrictEqual({
         id: EXISTING_ID,
@@ -84,7 +84,7 @@ describe(`PUT ${RESOURCE_URI}`, () => {
         birthDate: user.birthDate,
       });
 
-      const row = await dbHelper.findById('users', EXISTING_ID);
+      const row = await dbHelper.findById('contacts', EXISTING_ID);
 
       expect(row).toStrictEqual({
         id: body.id,

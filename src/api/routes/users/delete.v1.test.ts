@@ -18,12 +18,12 @@ describe(`DELETE ${RESOURCE_URI}`, () => {
     return req;
   }
 
-  beforeAll(() => dbHelper.truncateTable('users'));
+  beforeAll(() => dbHelper.truncateTable('contacts'));
 
-  beforeEach(()=> dbHelper.deleteById('users', EXISTING_ID))
+  beforeEach(()=> dbHelper.deleteById('contacts', EXISTING_ID))
 
   beforeEach(() =>
-    dbHelper.insert('users', {
+    dbHelper.insert('contacts', {
       id: EXISTING_ID,
       first_name: 'John',
       last_name: 'Doe',
@@ -38,7 +38,7 @@ describe(`DELETE ${RESOURCE_URI}`, () => {
     test('it deletes the user', async () => {
       await act().expect(204);
 
-      const user = await dbHelper.findById('users', EXISTING_ID);
+      const user = await dbHelper.findById('contacts', EXISTING_ID);
       expect(user).toBeUndefined();
     });
   });
