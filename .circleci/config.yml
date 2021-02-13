@@ -78,8 +78,8 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
-              cd dist
               git add -A
+              git add -f dist
               git commit -m 'Created Build'
               # check local branch to determine what Heroku git to use
               if [ "${CIRCLE_BRANCH}" == "master" ]; then
