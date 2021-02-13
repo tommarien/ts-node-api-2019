@@ -4,7 +4,7 @@ export default {
   openapi: '3.0.0',
   info: {
     title: 'TypeScript ',
-    description: 'An example setup using express, mongoose, typescript',
+    description: 'An example setup using express, postgresql, typescript',
     version: '1.0.0',
     contact: {
       name: 'Tom Marien',
