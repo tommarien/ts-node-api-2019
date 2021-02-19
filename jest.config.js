@@ -6,6 +6,7 @@ module.exports = {
   ],
   testPathIgnorePatterns: ["dist"],
   setupFilesAfterEnv: [
+    "dotenv/config",
     "<rootDir>/jest.setup.js"
   ],
   roots: ['<rootDir>/src'],

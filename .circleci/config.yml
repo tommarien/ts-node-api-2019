@@ -33,9 +33,7 @@ jobs:
           POSTGRES_DB: ts-node-api
     working_directory: ~/repo
     environment:
-      PGDATABASE: ts-node-api
-      PGUSER: node-api
-      PGPASSWORD: our-secret
+      DATABASE_TEST_URL: postgres://node-api:our-secret@localhost:5432/ts-node-api
     steps:
       - checkout
       - restore_cache:

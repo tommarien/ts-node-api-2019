@@ -11,12 +11,8 @@ declare global {
       ENFORCE_HTTPS?: string;
       ALLOWED_API_KEYS?: string;
       EXPOSE_API_DOCS?: string;
-      PGHOST?: string;
-      PGUSER?: string;
-      PGDATABASE?: string;
-      PGPASSWORD?: string;
-      PGPORT?: string | number;
-      PGMAXPOOLSIZE?: string | number;
+      DATABASE_URL?: string;
+      DATABASE_MAX_POOL_SIZE?: string | number;
     }
   }
 
