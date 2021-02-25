@@ -7,9 +7,7 @@ const API_KEY_HEADER_NAME = 'X-Api-Key';
 if (!process.env.ALLOWED_API_KEYS) logger.warn('No ALLOWED_API_KEYS env variable set!');
 const ALLOWED_API_KEYS = process.env.ALLOWED_API_KEYS ? process.env.ALLOWED_API_KEYS.split(';') : [];
 
-const buildUnauthorized = (message: string) => {
-  return { statusCode: 401, error: 'Unauthorized', message };
-};
+const buildUnauthorized = (message: string) => ({ statusCode: 401, error: 'Unauthorized', message });
 
 const apiKeyAuthentication: RequestHandler = (req, res, next) => {
   const apiKey = req.get(API_KEY_HEADER_NAME);

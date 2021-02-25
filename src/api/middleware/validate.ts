@@ -11,9 +11,7 @@ type RouteParts = keyof RouteSchema;
 
 const validatedRouteParts: readonly RouteParts[] = ['params', 'body', 'query'];
 
-const buildBadRequest = (message: string) => {
-  return { statusCode: 400, error: 'Bad Request', message };
-};
+const buildBadRequest = (message: string) => ({ statusCode: 400, error: 'Bad Request', message });
 
 export default function validate(routeSchema: RouteSchema): RequestHandler {
   const ajv = new Ajv({
