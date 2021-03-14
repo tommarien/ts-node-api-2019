@@ -19,7 +19,7 @@
     "serve": "yarn run clean && tsc-watch --project tsconfig.prod.json --onSuccess \"node --require dotenv/config dist/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --runInBand --config jest.config.js",
     "postinstall": "husky install",
-    "heroku-postbuild": "migrate up"
+    "heroku-postbuild": "yarn migrate up"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint"
