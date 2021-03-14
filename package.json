@@ -18,7 +18,8 @@
     "migrate:test": "yarn migrate --database-url-var DATABASE_TEST_URL",
     "serve": "yarn run clean && tsc-watch --project tsconfig.prod.json --onSuccess \"node --require dotenv/config dist/server.js\" | pino-pretty --colorize --translateTime --ignore hostname",
     "test": "jest --runInBand --config jest.config.js",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "heroku-postbuild": "migrate up"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint"
