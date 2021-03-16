@@ -1,9 +1,7 @@
 {
-  "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
   "extends": [
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    "plugin:import/typescript",
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "prettier"
   ],
@@ -13,58 +11,13 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
-    "sourceType": "module" // Allows for the use of imports
+    "sourceType": "module", // Allows for the use of imports
+    "project": "./tsconfig.eslint.json"
   },
   "plugins": [
     "sql"
   ],
   "rules": {
-    "camelcase": "warn",
-    "sql/format": [
-      2,
-      {
-        "ignoreExpressions": false,
-        "ignoreInline": true,
-        "ignoreTagless": true
-      }
-    ],
-    "sql/no-unsafe-query": [
-      2,
-      {
-        "allowLiteral": false
-      }
-    ],
-    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": [
-          "**/__mocks__/**", // jest pattern
-          "**/*{.,_}{test,spec}.{js,ts}", // tests where the extension or filename suffix denotes that it is a test
-          "**/jest.config.js", // jest config
-          "**/jest.spec.config.js", // jest config
-          "**/jest.setup.js" // jest setup
-        ],
-        "optionalDependencies": false
-      }
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "ts": "never"
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "ignoreRestSiblings": true
-      }
-    ],
-    "no-useless-constructor": "off",
-    "lines-between-class-members": "off"
+    "import/prefer-default-export": "off"
   }
 }
